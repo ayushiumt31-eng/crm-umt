@@ -1,23 +1,9 @@
-import React from 'react'
-import Navbar from '../components/layout/Navbar'
-import Sidebar from '../components/layout/Sidebar'
-import Footer from '../components/layout/Footer'
+import { Outlet } from "react-router-dom";
 
-interface DashboardLayoutProps {
-  children: React.ReactNode
-}
-
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+export default function DashboardLayout() {
   return (
-    <div className="dashboard-layout">
-      <Navbar />
-      <div className="dashboard-layout__body">
-        <Sidebar />
-        <main className="dashboard-layout__main">{children}</main>
-      </div>
-      <Footer />
+    <div className="min-h-screen bg-gray-100">
+      <Outlet />
     </div>
-  )
+  );
 }
-
-export default DashboardLayout

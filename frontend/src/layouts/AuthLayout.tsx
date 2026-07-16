@@ -1,15 +1,9 @@
-import React from 'react'
+import { Outlet } from "react-router-dom";
 
-interface AuthLayoutProps {
-  children: React.ReactNode
-}
-
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+export default function AuthLayout() {
   return (
-    <div className="auth-layout">
-      <main className="auth-layout__content">{children}</main>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <Outlet />
     </div>
-  )
+  );
 }
-
-export default AuthLayout

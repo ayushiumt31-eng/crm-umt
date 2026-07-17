@@ -1,4 +1,4 @@
-import { SidebarGroup as SidebarGroupType } from "../../types/sidebar";
+import type { SidebarGroup as SidebarGroupType } from "../../../types/sidebar";
 import SidebarItem from "./SidebarItem";
 
 interface Props {

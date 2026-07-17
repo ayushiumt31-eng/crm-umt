@@ -1,14 +1,14 @@
-import type { SidebarGroup as SidebarGroupType } from "../../../types/sidebar";
+import type { SidebarGroup as SidebarGroupType } from "@/types/sidebar";
 import SidebarItem from "./SidebarItem";
 
-interface Props {
+interface SidebarGroupProps {
   group: SidebarGroupType;
 }
 
-const SidebarGroup = ({ group }: Props) => {
+export default function SidebarGroup({ group }: SidebarGroupProps) {
   return (
-    <div className="p-4">
-      <h3 className="mb-2 text-xs font-semibold uppercase text-gray-500">
+    <div className="mb-6">
+      <h3 className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
         {group.title}
       </h3>
 
@@ -19,6 +19,4 @@ const SidebarGroup = ({ group }: Props) => {
       </div>
     </div>
   );
-};
-
-export default SidebarGroup;
+}

@@ -1,25 +1,21 @@
-import { Link } from "react-router-dom";
+import { Building2 } from "lucide-react";
 
-const SidebarLogo = () => {
+export default function SidebarLogo() {
   return (
-    <div className="border-b border-gray-200 px-6 py-5">
-      <Link to="/dashboard" className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-lg font-bold text-white">
-          C
-        </div>
+    <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-5">
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
+        <Building2 size={22} />
+      </div>
 
-        <div>
-          <h1 className="text-lg font-bold text-gray-800">
-            CRM
-          </h1>
+      <div>
+        <h2 className="text-lg font-bold text-gray-900">
+          CRM UMT
+        </h2>
 
-          <p className="text-xs text-gray-500">
-            Management System
-          </p>
-        </div>
-      </Link>
+        <p className="text-xs text-gray-500">
+          Customer Management
+        </p>
+      </div>
     </div>
   );
-};
-
-export default SidebarLogo;
+}

@@ -26,7 +26,7 @@ const AppRoutes: React.FC = () => {
 
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/payroll" element={<Payroll />} />

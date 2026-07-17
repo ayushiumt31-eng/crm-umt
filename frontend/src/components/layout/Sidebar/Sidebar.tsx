@@ -1,14 +1,13 @@
-import { sidebarMenu } from "../../../constants/sidebarMenu";
-import SidebarGroup from "./SidebarGroup";
+import SidebarLogo from "./SidebarLogo";
 
-const Sidebar = () => {
+export default function Sidebar() {
   return (
-    <aside className="w-64 min-h-screen bg-white border-r">
-      {sidebarMenu.map((group) => (
-        <SidebarGroup key={group.id} group={group} />
-      ))}
+    <aside className="flex h-screen w-64 flex-col border-r border-gray-200 bg-white">
+      <SidebarLogo />
+
+      <div className="flex-1 p-4">
+        Sidebar Menu
+      </div>
     </aside>
   );
-};
-
-export default Sidebar;
+}

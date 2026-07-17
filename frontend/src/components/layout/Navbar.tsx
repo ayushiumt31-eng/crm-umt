@@ -1,16 +1,9 @@
-import React from 'react'
-
-const Navbar: React.FC = () => {
+const Navbar = () => {
   return (
-    <header className="navbar">
-      <div className="navbar__brand">CRM Dashboard</div>
-      <nav className="navbar__nav">
-        <a href="#">Home</a>
-        <a href="#">Support</a>
-        <a href="#">Profile</a>
-      </nav>
+    <header className="h-16 border-b bg-white flex items-center px-6">
+      <h1 className="text-xl font-semibold">CRM Dashboard</h1>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

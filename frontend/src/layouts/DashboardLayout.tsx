@@ -1,23 +1,19 @@
-import React from 'react'
-import Navbar from '../components/layout/Navbar'
-import Sidebar from '../components/layout/Sidebar'
-import Footer from '../components/layout/Footer'
+import { Outlet } from "react-router-dom";
+import Sidebar from "../components/layout/Sidebar";
+import Navbar from "../components/layout/Navbar";
 
-interface DashboardLayoutProps {
-  children: React.ReactNode
-}
-
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+export default function DashboardLayout() {
   return (
-    <div className="dashboard-layout">
-      <Navbar />
-      <div className="dashboard-layout__body">
-        <Sidebar />
-        <main className="dashboard-layout__main">{children}</main>
-      </div>
-      <Footer />
-    </div>
-  )
-}
+    <div className="flex min-h-screen">
+      <Sidebar />
 
-export default DashboardLayout
+      <div className="flex-1">
+        <Navbar />
+
+        <main className="p-6">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}

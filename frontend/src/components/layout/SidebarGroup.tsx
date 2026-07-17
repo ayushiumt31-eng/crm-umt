@@ -1,23 +1,24 @@
-import React from 'react'
-import SidebarItem from './SidebarItem'
-import { SidebarItem as SidebarItemType } from '../../types/sidebar'
+import { SidebarGroup as SidebarGroupType } from "../../types/sidebar";
+import SidebarItem from "./SidebarItem";
 
 interface Props {
-  title: string
-  items: SidebarItemType[]
+  group: SidebarGroupType;
 }
 
-const SidebarGroup: React.FC<Props> = ({ title, items }) => {
+const SidebarGroup = ({ group }: Props) => {
   return (
-    <div className="sidebar-group">
-      <h3>{title}</h3>
-      <ul>
-        {items.map((item) => (
-          <SidebarItem key={item.path} item={item} />
-        ))}
-      </ul>
-    </div>
-  )
-}
+    <div className="p-4">
+      <h3 className="mb-2 text-xs font-semibold uppercase text-gray-500">
+        {group.title}
+      </h3>
 
-export default SidebarGroup
+      <div className="space-y-1">
+        {group.children.map((item) => (
+          <SidebarItem key={item.id} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default SidebarGroup;

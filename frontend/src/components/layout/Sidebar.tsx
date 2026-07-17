@@ -1,13 +1,14 @@
-import React from 'react'
-import sidebarMenu from '../../constants/sidebarMenu'
-import SidebarGroup from './SidebarGroup'
+import { sidebarMenu } from "../../constants/sidebarMenu";
+import SidebarGroup from "./SidebarGroup";
 
-const Sidebar: React.FC = () => {
+const Sidebar = () => {
   return (
-    <aside className="sidebar">
-      <SidebarGroup title="Menu" items={sidebarMenu} />
+    <aside className="w-64 min-h-screen bg-white border-r">
+      {sidebarMenu.map((group) => (
+        <SidebarGroup key={group.id} group={group} />
+      ))}
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

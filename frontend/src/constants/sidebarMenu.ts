@@ -8,7 +8,7 @@ import {
   Settings,
 } from "lucide-react";
 
-import { SidebarGroup } from "../types/sidebar";
+import type { SidebarGroup } from "../types/sidebar";
 
 export const sidebarMenu: SidebarGroup[] = [
   {

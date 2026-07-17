@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'
 import AuthLayout from '../layouts/AuthLayout'
 import DashboardLayout from '../layouts/DashboardLayout'
 import Login from '../pages/auth/Login'
@@ -19,7 +19,7 @@ const AppRoutes: React.FC = () => {
     <Router>
       <Routes>
         <Route element={<PublicRoute />}>
-          <Route element={<AuthLayout />}>
+          <Route element={<AuthLayout><Outlet /></AuthLayout>}>
             <Route path="/login" element={<Login />} />
           </Route>
         </Route>

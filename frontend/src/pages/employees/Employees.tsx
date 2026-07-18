@@ -1,3 +1,5 @@
+import { EmployeeList } from '@/features/employees/pages'
+
 export default function Employees() {
-  return <h1>Employees</h1>
+  return <EmployeeList />
 }

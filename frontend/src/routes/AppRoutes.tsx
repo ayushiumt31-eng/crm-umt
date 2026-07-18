@@ -9,6 +9,7 @@ import AddCustomer from '../pages/customers/AddCustomer'
 import ViewCustomer from '../pages/customers/ViewCustomer'
 import EditCustomer from '../pages/customers/EditCustomer'
 import { EmployeeList, AddEmployee, EditEmployee, ViewEmployee } from '../features/employees/pages'
+import { LeadsList, AddLead, EditLead, ViewLead } from '../features/leads/pages'
 import Payroll from '../pages/payroll/Payroll'
 import Sales from '../pages/sales/Sales'
 import Marketing from '../pages/marketing/Marketing'
@@ -40,6 +41,12 @@ const AppRoutes: React.FC = () => {
             <Route path="/employees/add" element={<AddEmployee />} />
             <Route path="/employees/:id" element={<ViewEmployee />} />
             <Route path="/employees/:id/edit" element={<EditEmployee />} />
+            
+            <Route path="/leads" element={<LeadsList />} />
+            <Route path="/leads/add" element={<AddLead />} />
+            <Route path="/leads/:id" element={<ViewLead />} />
+            <Route path="/leads/:id/edit" element={<EditLead />} />
+            
             <Route path="/payroll" element={<Payroll />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/marketing" element={<Marketing />} />

@@ -5,6 +5,9 @@ import DashboardLayout from '../layouts/DashboardLayout'
 import Login from '../pages/auth/Login'
 import Dashboard from '../pages/dashboard/Dashboard'
 import Customers from '../pages/customers/Customers'
+import AddCustomer from '../pages/customers/AddCustomer'
+import ViewCustomer from '../pages/customers/ViewCustomer'
+import EditCustomer from '../pages/customers/EditCustomer'
 import Employees from '../pages/employees/Employees'
 import Payroll from '../pages/payroll/Payroll'
 import Sales from '../pages/sales/Sales'
@@ -27,7 +30,12 @@ const AppRoutes: React.FC = () => {
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            
             <Route path="/customers" element={<Customers />} />
+            <Route path="/customers/add" element={<AddCustomer />} />
+            <Route path="/customers/:id" element={<ViewCustomer />} />
+            <Route path="/customers/:id/edit" element={<EditCustomer />} />
+            
             <Route path="/employees" element={<Employees />} />
             <Route path="/payroll" element={<Payroll />} />
             <Route path="/sales" element={<Sales />} />

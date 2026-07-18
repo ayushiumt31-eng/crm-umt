@@ -34,6 +34,11 @@ const AppRoutes: React.FC = () => {
             <Route path="/marketing" element={<Marketing />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/settings" element={<Settings />} />
+
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/customers/add" element={<AddCustomer />} />
+            <Route path="/customers/:id" element={<ViewCustomer />} />
+            <Route path="/customers/:id/edit" element={<EditCustomer />} />
           </Route>
         </Route>
       </Routes>

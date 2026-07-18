@@ -6,6 +6,7 @@ import {
   Megaphone,
   BarChart3,
   Settings,
+  Zap,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -36,6 +37,13 @@ export const sidebarMenu: SidebarGroup[] = [
         title: "Customers",
         path: "/customers",
         icon: Users,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 2,
+        title: "Leads",
+        path: "/leads",
+        icon: Zap,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],

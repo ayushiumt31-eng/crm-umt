@@ -1,83 +1,86 @@
-import axios from "axios";
-import type { Lead, CreateLeadPayload, UpdateLeadPayload, LeadListResponse, LeadFilters } from "@/features/leads/types/lead";
+import { LocalDataService } from "./baseService";
+import type { Lead, CreateLeadPayload, UpdateLeadPayload, LeadFilters } from "@/features/leads/types/lead";
+import { dummyLeads } from "@/features/leads/data/dummy-leads";
 
-const API_BASE_URL = "/api/leads";
+class LeadService extends LocalDataService<Lead> {
+  getDummyData(): Lead[] {
+    return dummyLeads;
+  }
 
-class LeadService {
   /**
-   * Get all leads with optional filtering and pagination
+   * Get leads with filters (search, status, source, assigned)
    */
-  async getLeads(filters?: LeadFilters): Promise<LeadListResponse> {
-    try {
-      const params = new URLSearchParams();
-      if (filters?.search) params.append("search", filters.search);
-      if (filters?.status) params.append("status", filters.status);
-      if (filters?.source) params.append("source", filters.source);
-      if (filters?.assignedTo) params.append("assignedTo", filters.assignedTo);
-      if (filters?.sortBy) params.append("sortBy", filters.sortBy);
-      if (filters?.sortOrder) params.append("sortOrder", filters.sortOrder);
-      if (filters?.page) params.append("page", String(filters.page));
-      if (filters?.limit) params.append("limit", String(filters.limit));
+  async getLeads(filters?: LeadFilters): Promise<Lead[]> {
+    let results = await this.getAll();
 
-      const response = await axios.get<LeadListResponse>(
-        `${API_BASE_URL}${params.toString() ? `?${params.toString()}` : ""}`
+    if (filters?.search) {
+      const query = filters.search.toLowerCase();
+      results = results.filter(
+        (lead) =>
+          lead.leadName.toLowerCase().includes(query) ||
+          lead.companyName.toLowerCase().includes(query) ||
+          lead.contactPerson.toLowerCase().includes(query) ||
+          lead.email.toLowerCase().includes(query) ||
+          lead.phone.includes(query)
       );
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching leads:", error);
-      throw error;
     }
+
+    if (filters?.status && (filters.status as string) !== "All") {
+      results = results.filter((lead) => lead.status === filters.status);
+    }
+
+    if (filters?.source && (filters.source as string) !== "All") {
+      results = results.filter((lead) => lead.source === filters.source);
+    }
+
+    if (filters?.assignedTo && filters.assignedTo !== "All") {
+      results = results.filter((lead) => lead.assignedTo === filters.assignedTo);
+    }
+
+    // Pagination
+    if (filters?.page && filters?.limit) {
+      const start = (filters.page - 1) * filters.limit;
+      results = results.slice(start, start + filters.limit);
+    }
+
+    return results;
   }
 
   /**
    * Get a single lead by ID
    */
   async getLeadById(id: string): Promise<Lead> {
-    try {
-      const response = await axios.get<Lead>(`${API_BASE_URL}/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching lead:", error);
-      throw error;
+    const lead = await this.getById(id);
+    if (!lead) {
+      throw new Error(`Lead with id ${id} not found`);
     }
+    return lead;
   }
 
   /**
    * Create a new lead
    */
   async createLead(payload: CreateLeadPayload): Promise<Lead> {
-    try {
-      const response = await axios.post<Lead>(API_BASE_URL, payload);
-      return response.data;
-    } catch (error) {
-      console.error("Error creating lead:", error);
-      throw error;
-    }
+    const leadData = {
+      ...payload,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    } as Omit<Lead, "id">;
+    return this.create(leadData);
   }
 
   /**
    * Update an existing lead
    */
   async updateLead(id: string, payload: UpdateLeadPayload): Promise<Lead> {
-    try {
-      const response = await axios.put<Lead>(`${API_BASE_URL}/${id}`, payload);
-      return response.data;
-    } catch (error) {
-      console.error("Error updating lead:", error);
-      throw error;
-    }
+    return this.update(id, payload as Partial<Lead>);
   }
 
   /**
    * Delete a lead
    */
   async deleteLead(id: string): Promise<void> {
-    try {
-      await axios.delete(`${API_BASE_URL}/${id}`);
-    } catch (error) {
-      console.error("Error deleting lead:", error);
-      throw error;
-    }
+    return this.delete(id);
   }
 }
 

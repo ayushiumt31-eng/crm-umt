@@ -1,17 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Plus } from "lucide-react";
 
 interface CustomerToolbarProps {
   onSearch?: (query: string) => void;
+  onAdd?: () => void;
 }
 
 export function CustomerToolbar({
   onSearch,
+  onAdd,
 }: CustomerToolbarProps) {
-  const navigate = useNavigate();
-
   return (
     <div className="space-y-4">
       {/* Search & Add Row */}
@@ -35,7 +34,7 @@ export function CustomerToolbar({
 
         {/* Add Customer Button */}
         <Button
-          onClick={() => navigate("/customers/add")}
+          onClick={onAdd}
           className="flex items-center gap-2 whitespace-nowrap bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 border border-blue-700/50"
         >
           <Plus className="h-5 w-5" />

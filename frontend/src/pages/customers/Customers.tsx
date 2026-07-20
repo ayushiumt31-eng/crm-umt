@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { DataTable } from "@/components/common/DataTable";
 import { CustomerToolbar } from "@/components/customers/CustomerToolbar";
-import { CustomerTable } from "@/components/customers/CustomerTable";
 import { DeleteCustomerDialog } from "@/components/customers/DeleteCustomerDialog";
 import { dummyCustomers } from "@/data/customers";
 import { useDebounce } from "@/hooks";
@@ -32,7 +32,7 @@ export default function Customers() {
   // Calculate stats
   const activeCustomers = customers.filter((c) => c.status === "Active").length;
   const inactiveCustomers = customers.filter((c) => c.status === "Inactive").length;
-  const newCustomers = Math.floor(customers.length * 0.3); // Simulated
+  const newCustomers = Math.floor(customers.length * 0.3);
 
   const handleView = (id: string) => {
     navigate(`/customers/${id}`);
@@ -40,6 +40,10 @@ export default function Customers() {
 
   const handleEdit = (id: string) => {
     navigate(`/customers/${id}/edit`);
+  };
+
+  const handleAdd = () => {
+    navigate("/customers/add");
   };
 
   const handleDeleteClick = (id: string) => {
@@ -54,10 +58,7 @@ export default function Customers() {
   const handleConfirmDelete = async () => {
     if (!deleteDialog.id) return;
     setIsDeleting(true);
-    
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 500));
-    
     setCustomers((prev) => prev.filter((c) => c.id !== deleteDialog.id));
     setDeleteDialog({ open: false });
     setIsDeleting(false);
@@ -71,7 +72,6 @@ export default function Customers() {
     <div className="space-y-8">
       {/* Header with gradient background */}
       <div className="rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 dark:from-blue-900 dark:via-cyan-900 dark:to-blue-900 p-8 shadow-lg overflow-hidden relative">
-        {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white/20 rounded-full blur-3xl animate-pulse" style={{ animation: "pulse 6s ease-in-out infinite" }}></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "3s" }}></div>
@@ -142,7 +142,7 @@ export default function Customers() {
       </div>
 
       {/* Toolbar */}
-      <CustomerToolbar onSearch={setSearchQuery} />
+      <CustomerToolbar onSearch={setSearchQuery} onAdd={handleAdd} />
 
       {/* Table with enhanced styling */}
       <div className="rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
@@ -162,12 +162,50 @@ export default function Customers() {
             </p>
           </div>
         </div>
-        
-        <CustomerTable
-          customers={filteredCustomers}
+
+        <DataTable
+          data={filteredCustomers}
+          columns={[
+            {
+              key: "name",
+              label: "Name",
+              render: (value) => <p className="font-semibold text-slate-900 dark:text-slate-100">{value}</p>,
+            },
+            {
+              key: "email",
+              label: "Email",
+              render: (value) => <p className="text-slate-600 dark:text-slate-400 text-sm">{value}</p>,
+            },
+            {
+              key: "phone",
+              label: "Phone",
+              render: (value) => <p className="text-slate-600 dark:text-slate-400 text-sm">{value}</p>,
+            },
+            {
+              key: "company",
+              label: "Company",
+              render: (value) => <p className="text-slate-600 dark:text-slate-400 text-sm">{value}</p>,
+            },
+            {
+              key: "status",
+              label: "Status",
+              render: (value) => (
+                <span
+                  className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+                    value === "Active"
+                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
+                      : "bg-slate-100 text-slate-700 dark:bg-slate-900/30 dark:text-slate-400"
+                  }`}
+                >
+                  {value === "Active" ? "🟢" : "⭕"} {value}
+                </span>
+              ),
+            },
+          ]}
           onView={handleView}
           onEdit={handleEdit}
           onDelete={handleDeleteClick}
+          showActions={true}
         />
       </div>
 
@@ -180,7 +218,7 @@ export default function Customers() {
           <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">No customers found</h3>
           <p className="text-slate-600 dark:text-slate-400 mb-6">Try adjusting your search criteria or add a new customer</p>
           <button
-            onClick={() => navigate("/customers/add")}
+            onClick={handleAdd}
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-2 font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:from-blue-700 hover:to-cyan-700 transform hover:-translate-y-0.5"
           >
             <UserPlus className="h-4 w-4" />

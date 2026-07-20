@@ -1,82 +1,81 @@
-import axios from "axios";
-import type { Employee, CreateEmployeePayload, UpdateEmployeePayload, EmployeeListResponse, EmployeeFilters } from "@/features/employees/types/employee";
+import { LocalDataService } from "./baseService";
+import type { Employee, CreateEmployeePayload, UpdateEmployeePayload, EmployeeFilters } from "@/features/employees/types/employee";
+import { dummyEmployees } from "@/features/employees/data/dummy-employees";
 
-const API_BASE_URL = "/api/employees";
+class EmployeeService extends LocalDataService<Employee> {
+  getDummyData(): Employee[] {
+    return dummyEmployees;
+  }
 
-class EmployeeService {
   /**
-   * Get all employees with optional filtering and pagination
+   * Get employees with filters (search, status, department, etc.)
    */
-  async getEmployees(filters?: EmployeeFilters): Promise<EmployeeListResponse> {
-    try {
-      const params = new URLSearchParams();
-      if (filters?.search) params.append("search", filters.search);
-      if (filters?.status) params.append("status", filters.status);
-      if (filters?.department) params.append("department", filters.department);
-      if (filters?.sortBy) params.append("sortBy", filters.sortBy);
-      if (filters?.sortOrder) params.append("sortOrder", filters.sortOrder);
-      if (filters?.page) params.append("page", String(filters.page));
-      if (filters?.limit) params.append("limit", String(filters.limit));
+  async getEmployees(filters?: EmployeeFilters): Promise<Employee[]> {
+    let results = await this.getAll();
 
-      const response = await axios.get<EmployeeListResponse>(
-        `${API_BASE_URL}${params.toString() ? `?${params.toString()}` : ""}`
+    if (filters?.search) {
+      const query = filters.search.toLowerCase();
+      results = results.filter(
+        (emp) =>
+          emp.firstName.toLowerCase().includes(query) ||
+          emp.lastName.toLowerCase().includes(query) ||
+          emp.email.toLowerCase().includes(query) ||
+          emp.phone.includes(query)
       );
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching employees:", error);
-      throw error;
     }
+
+    if (filters?.status && (filters.status as string) !== "All") {
+      results = results.filter((emp) => emp.status === filters.status);
+    }
+
+    if (filters?.department && (filters.department as string) !== "All") {
+      results = results.filter((emp) => emp.department === filters.department);
+    }
+
+    // Pagination
+    if (filters?.page && filters?.limit) {
+      const start = (filters.page - 1) * filters.limit;
+      results = results.slice(start, start + filters.limit);
+    }
+
+    return results;
   }
 
   /**
    * Get a single employee by ID
    */
   async getEmployeeById(id: string): Promise<Employee> {
-    try {
-      const response = await axios.get<Employee>(`${API_BASE_URL}/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching employee:", error);
-      throw error;
+    const employee = await this.getById(id);
+    if (!employee) {
+      throw new Error(`Employee with id ${id} not found`);
     }
+    return employee;
   }
 
   /**
    * Create a new employee
    */
   async createEmployee(payload: CreateEmployeePayload): Promise<Employee> {
-    try {
-      const response = await axios.post<Employee>(API_BASE_URL, payload);
-      return response.data;
-    } catch (error) {
-      console.error("Error creating employee:", error);
-      throw error;
-    }
+    const employeeData = {
+      ...payload,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    } as Omit<Employee, "id">;
+    return this.create(employeeData);
   }
 
   /**
    * Update an existing employee
    */
   async updateEmployee(id: string, payload: UpdateEmployeePayload): Promise<Employee> {
-    try {
-      const response = await axios.put<Employee>(`${API_BASE_URL}/${id}`, payload);
-      return response.data;
-    } catch (error) {
-      console.error("Error updating employee:", error);
-      throw error;
-    }
+    return this.update(id, payload as Partial<Employee>);
   }
 
   /**
    * Delete an employee
    */
   async deleteEmployee(id: string): Promise<void> {
-    try {
-      await axios.delete(`${API_BASE_URL}/${id}`);
-    } catch (error) {
-      console.error("Error deleting employee:", error);
-      throw error;
-    }
+    return this.delete(id);
   }
 }
 

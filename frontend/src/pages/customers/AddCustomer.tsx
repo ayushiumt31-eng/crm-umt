@@ -1,168 +1,58 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle, Plus } from "lucide-react";
-import { FormModal, FormRenderer } from "@/components/common";
-import { useFormModal } from "@/hooks";
+import { ArrowLeft, CheckCircle, ChevronDown, Loader2 } from "lucide-react";
 import { dummyCustomers } from "@/data/customers";
-import { User, Building2, CheckCircle2 } from "lucide-react";
 
 export default function AddCustomer() {
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  const form = useFormModal({
-    onSubmit: async (data) => {
-      console.log("Creating customer:", data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      // Add to dummy data (for demo)
-      const newCustomer = {
-        id: String(dummyCustomers.length + 1),
-        ...data,
-        createdAt: new Date().toISOString(),
-      };
-      dummyCustomers.push(newCustomer);
-
-      setShowSuccess(true);
-      setTimeout(() => {
-        navigate("/customers");
-      }, 1500);
+  const [expandedSection, setExpandedSection] = useState<string | null>("basic");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      company: "",
+      status: "Active",
     },
   });
 
-  // Initialize form on mount and auto-open
-  useEffect(() => {
-    if (!isInitialized) {
-      form.updateField("name", "");
-      form.updateField("email", "");
-      form.updateField("phone", "");
-      form.updateField("company", "");
-      form.updateField("status", "Active");
-      setIsInitialized(true);
-      form.open();
+  const onSubmit = async (data: any) => {
+    setIsSubmitting(true);
+    try {
+      const newCustomer = {
+        id: String(dummyCustomers.length + 1),
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        status: data.status || "Active",
+        createdAt: new Date().toISOString(),
+      };
+      dummyCustomers.push(newCustomer);
+      setShowSuccess(true);
+      setTimeout(() => navigate("/customers"), 1500);
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [isInitialized, form]);
-
-  const formFields = [
-    {
-      id: "name",
-      label: "Full Name",
-      type: "text" as const,
-      placeholder: "Enter customer's full name",
-      required: true,
-      value: form.formData.name || "",
-      onChange: (val: string) => form.updateField("name", val),
-      error: form.errors.name,
-    },
-    {
-      id: "email",
-      label: "Email Address",
-      type: "email" as const,
-      placeholder: "customer@example.com",
-      required: true,
-      value: form.formData.email || "",
-      onChange: (val: string) => form.updateField("email", val),
-      error: form.errors.email,
-    },
-    {
-      id: "phone",
-      label: "Phone Number",
-      type: "tel" as const,
-      placeholder: "+1 (555) 000-0000",
-      required: true,
-      helper: "Include country code for international numbers",
-      value: form.formData.phone || "",
-      onChange: (val: string) => form.updateField("phone", val),
-      error: form.errors.phone,
-    },
-    {
-      id: "company",
-      label: "Company Name",
-      type: "text" as const,
-      placeholder: "Enter company name",
-      required: true,
-      value: form.formData.company || "",
-      onChange: (val: string) => form.updateField("company", val),
-      error: form.errors.company,
-    },
-    {
-      id: "status",
-      label: "Customer Status",
-      type: "select" as const,
-      options: [
-        { value: "Active", label: "🟢 Active - Customer is currently active" },
-        { value: "Inactive", label: "⭕ Inactive - Customer is inactive" },
-      ],
-      value: form.formData.status || "Active",
-      onChange: (val: string) => form.updateField("status", val),
-    },
-  ];
-
-  const formSections = [
-    {
-      title: "Contact Information",
-      description: "Enter customer's personal details",
-      icon: (
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
-          <User className="h-6 w-6" />
-        </div>
-      ),
-      fields: ["name", "email", "phone"],
-    },
-    {
-      title: "Company Information",
-      description: "Business details",
-      icon: (
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white">
-          <Building2 className="h-6 w-6" />
-        </div>
-      ),
-      fields: ["company"],
-    },
-    {
-      title: "Status",
-      description: "Additional information",
-      icon: (
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
-          <CheckCircle2 className="h-6 w-6" />
-        </div>
-      ),
-      fields: ["status"],
-    },
-  ];
-
-  const handleValidation = (data: Record<string, string>) => {
-    const errors: Record<string, string> = {};
-    if (!data.name?.trim()) errors.name = "Name is required";
-    if (!data.email?.includes("@")) errors.email = "Valid email required";
-    if (!data.phone || data.phone.length < 10) errors.phone = "Valid phone required";
-    if (!data.company?.trim()) errors.company = "Company is required";
-    return errors;
   };
 
   return (
     <div className="space-y-8">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate("/customers")}
-          className="hover:bg-slate-100 dark:hover:bg-slate-800"
-        >
+        <Button variant="ghost" size="icon" onClick={() => navigate("/customers")} className="hover:bg-slate-100 dark:hover:bg-slate-800">
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
             Add New Customer
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">
-            Create a new customer profile with all essential information
-          </p>
+          <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">Create a new customer profile</p>
         </div>
       </div>
 
@@ -179,29 +69,145 @@ export default function AddCustomer() {
         </div>
       )}
 
-      {/* Form Modal - Auto opens on page load */}
-      <FormModal
-        isOpen={form.isOpen}
-        onClose={() => {
-          form.close();
-          navigate("/customers");
-        }}
-        title="Add Customer"
-        description="Create a new customer profile with all essential information"
-        icon={
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
-            <Plus className="h-5 w-5" />
-          </div>
-        }
-        variant="modal"
-        size="md"
-        submitButtonText="Add Customer"
-        cancelButtonText="Cancel"
-        isLoading={form.isLoading}
-        onSubmit={() => form.submit(handleValidation)}
-      >
-        <FormRenderer fields={formFields} sections={formSections} />
-      </FormModal>
+      {/* Form with Sections */}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Basic Information Section */}
+        <div className="rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setExpandedSection(expandedSection === "basic" ? null : "basic")}
+            className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">👤</div>
+              <div className="text-left">
+                <h3 className="font-bold text-slate-900 dark:text-white">Basic Information</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Personal details</p>
+              </div>
+            </div>
+            <ChevronDown className={`h-5 w-5 text-slate-600 dark:text-slate-400 transition-transform ${expandedSection === "basic" ? "rotate-180" : ""}`} />
+          </button>
+
+          {expandedSection === "basic" && (
+            <div className="border-t border-slate-200/50 dark:border-slate-800/50 px-6 py-6 bg-slate-50/50 dark:bg-slate-800/20 space-y-4">
+              {/* Row 1: Name | Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter customer's full name"
+                    {...register("name")}
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name?.message}</p>}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="customer@example.com"
+                    {...register("email")}
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email?.message}</p>}
+                </div>
+              </div>
+
+              {/* Row 2: Phone | Address */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    Phone Number <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="phone"
+                    placeholder="+1 (555) 000-0000"
+                    {...register("phone")}
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone?.message}</p>}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter street address"
+                    {...register("address")}
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Company Information Section */}
+        <div className="rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setExpandedSection(expandedSection === "company" ? null : "company")}
+            className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400">🏢</div>
+              <div className="text-left">
+                <h3 className="font-bold text-slate-900 dark:text-white">Company Information</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Company details and status</p>
+              </div>
+            </div>
+            <ChevronDown className={`h-5 w-5 text-slate-600 dark:text-slate-400 transition-transform ${expandedSection === "company" ? "rotate-180" : ""}`} />
+          </button>
+
+          {expandedSection === "company" && (
+            <div className="border-t border-slate-200/50 dark:border-slate-800/50 px-6 py-6 bg-slate-50/50 dark:bg-slate-800/20 space-y-4">
+              {/* Row 1: Company | Status */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    Company Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter company name"
+                    {...register("company")}
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                    Customer Status
+                  </label>
+                  <select
+                    {...register("status")}
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="Active">🟢 Active</option>
+                    <option value="Inactive">⭕ Inactive</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Submit Buttons */}
+        <div className="flex gap-3 justify-end pt-4">
+          <Button type="button" onClick={() => navigate("/customers")} variant="outline" className="px-6 py-2">
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isSubmitting} className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-2 flex items-center gap-2">
+            {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isSubmitting ? "Adding..." : "Add Customer"}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

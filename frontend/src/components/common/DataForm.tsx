@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export interface FormField {
   name: string;
@@ -8,6 +9,8 @@ export interface FormField {
   required?: boolean;
   options?: { label: string; value: string }[];
   validation?: (value: any) => string | null;
+  fullWidth?: boolean; // For fields that should span full width
+  colSpan?: 1 | 2; // Explicit column span control
 }
 
 export interface DataFormProps {
@@ -18,10 +21,12 @@ export interface DataFormProps {
   submitLabel?: string;
   title?: string;
   description?: string;
+  cancelPath?: string;
+  onCancel?: () => void;
 }
 
 /**
- * Generic Data Form Component
+ * Generic Data Form Component with 2-Column Responsive Layout
  * Usage: <DataForm fields={fields} onSubmit={handleSubmit} />
  */
 export function DataForm({
@@ -32,6 +37,8 @@ export function DataForm({
   submitLabel = "Submit",
   title,
   description,
+  cancelPath,
+  onCancel,
 }: DataFormProps) {
   const [formData, setFormData] = useState(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -96,17 +103,40 @@ export function DataForm({
     }
   };
 
+  // Determine if field should span full width
+  const isFullWidth = (field: FormField) => {
+    return (
+      field.type === "textarea" ||
+      field.fullWidth === true ||
+      field.colSpan === 2
+    );
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {title && <h2 className="text-2xl font-bold">{title}</h2>}
-      {description && <p className="text-gray-600 dark:text-gray-400">{description}</p>}
+      {title && (
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          {title}
+        </h2>
+      )}
+      {description && (
+        <p className="text-slate-600 dark:text-slate-400">{description}</p>
+      )}
 
-      <div className="space-y-4">
+      {/* 2-Column Responsive Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {fields.map((field) => (
-          <div key={field.name} className="space-y-2">
-            <label className="block text-sm font-medium text-slate-900 dark:text-white">
+          <div
+            key={field.name}
+            className={`space-y-2 ${
+              isFullWidth(field) ? "md:col-span-2" : ""
+            }`}
+          >
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
               {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {field.required && (
+                <span className="text-red-500 ml-1 font-bold">*</span>
+              )}
             </label>
 
             {field.type === "select" ? (
@@ -114,7 +144,7 @@ export function DataForm({
                 name={field.name}
                 value={formData[field.name] || ""}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm"
+                className="w-full px-4 py-3 rounded-xl border border-blue-200 dark:border-blue-900/40 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-medium transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-900/40"
               >
                 <option value="">Select {field.label}</option>
                 {field.options?.map((opt) => (
@@ -130,7 +160,7 @@ export function DataForm({
                 onChange={handleChange}
                 placeholder={field.placeholder}
                 rows={4}
-                className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm"
+                className="w-full px-4 py-3 rounded-xl border border-blue-200 dark:border-blue-900/40 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-medium transition-all resize-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-900/40"
               />
             ) : (
               <input
@@ -139,26 +169,39 @@ export function DataForm({
                 value={formData[field.name] || ""}
                 onChange={handleChange}
                 placeholder={field.placeholder}
-                className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm"
+                className="w-full px-4 py-3 rounded-xl border border-blue-200 dark:border-blue-900/40 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-medium transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-900/40"
               />
             )}
 
             {errors[field.name] && (
-              <p className="text-red-600 dark:text-red-400 text-sm">
-                {errors[field.name]}
+              <p className="text-red-600 dark:text-red-400 text-sm font-medium">
+                ✗ {errors[field.name]}
               </p>
             )}
           </div>
         ))}
       </div>
 
-      <button
-        type="submit"
-        disabled={loading || submitting}
-        className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-      >
-        {submitting ? "Submitting..." : submitLabel}
-      </button>
+      {/* Action Buttons - Right Aligned */}
+      <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4">
+        {(onCancel || cancelPath) && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+            className="px-6 py-2 order-2 sm:order-1"
+          >
+            Cancel
+          </Button>
+        )}
+        <Button
+          type="submit"
+          disabled={loading || submitting}
+          className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:opacity-50 text-white font-semibold px-6 py-2 rounded-lg transition-all order-1 sm:order-2"
+        >
+          {submitting ? "Submitting..." : submitLabel}
+        </Button>
+      </div>
     </form>
   );
 }

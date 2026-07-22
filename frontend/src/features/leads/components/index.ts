@@ -4,4 +4,4 @@ export { LeadToolbar } from "./LeadToolbar";
 export { LeadTable } from "./LeadTable";
 export { DeleteLeadDialog } from "./DeleteLeadDialog";
 export { LeadDetailsCard, LeadDetailsSection } from "./LeadDetailsCard";
-export { LeadForm } from "./LeadForm";
+export { LeadForm } from "../forms/LeadForm";

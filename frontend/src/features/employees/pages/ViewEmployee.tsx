@@ -1,19 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { EmployeeDetailsSection, DeleteEmployeeDialog, EmployeeStatusBadge } from "../components";
-import { useEmployees } from "../hooks/useEmployees";
+import { dummyEmployees } from "../data/dummy-employees";
 import { ArrowLeft, Edit2, Printer, Trash2 } from "lucide-react";
 
 export function ViewEmployee() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { getEmployeeById, deleteEmployee } = useEmployees();
   const [deleteDialog, setDeleteDialog] = useState({ open: false });
   const [isDeleting, setIsDeleting] = useState(false);
 
   const employee = useMemo(() => {
-    return id ? getEmployeeById(id) : null;
-  }, [id, getEmployeeById]);
+    return id ? dummyEmployees.find(emp => emp.id === id) : null;
+  }, [id]);
 
   const handlePrint = () => {
     window.print();
@@ -28,7 +27,8 @@ export function ViewEmployee() {
     setIsDeleting(true);
 
     try {
-      await deleteEmployee(id);
+      // TODO: Use useSubmit hook for API call
+      console.log("Delete employee:", id);
       navigate("/employees");
     } catch (error) {
       console.error("Failed to delete employee:", error);

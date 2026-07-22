@@ -10,7 +10,6 @@ export { useSubmitApi } from "./useSubmitApi";
 export { useGet, useSubmit, useDelete as useCRUDDelete } from "./useCommonCRUD";
 
 // Form & Data
-export { useCustomers } from "./useCustomers";
 export { useDebounce } from "./useDebounce";
 export { useLocalStorage } from "./useLocalStorage";
 export { useAsync } from "./useAsync";

@@ -1,25 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { LeadForm } from "../components";
-import { useLeads } from "../hooks/useLeads";
+import { dummyLeads } from "../data/dummy-leads";
 import { FormModal } from "@/components/common/FormModal";
 
 export function EditLead() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { getLeadById, updateLead, assignedEmployees } = useLeads();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const lead = useMemo(() => {
-    return id ? getLeadById(id) : null;
-  }, [id, getLeadById]);
+    return id ? dummyLeads.find(lead => lead.id === id) : null;
+  }, [id]);
 
   const handleSubmit = async (data: any) => {
     if (!id) return;
 
     try {
       setIsSubmitting(true);
-      await updateLead(id, data);
+      // TODO: Use useSubmit hook for API call
+      console.log("Update lead:", data);
       navigate(`/leads/${id}`);
     } catch (error) {
       console.error("Failed to update lead:", error);

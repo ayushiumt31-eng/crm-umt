@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { LeadForm } from "../components";
-import { useLeads } from "../hooks/useLeads";
+// import { useLeads } from "../hooks/useLeads";
 import { FormModal } from "@/components/common/FormModal";
 
 export function AddLead() {

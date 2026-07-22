@@ -1,19 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { LeadDetailsSection, DeleteLeadDialog, LeadStatusBadge } from "../components";
-import { useLeads } from "../hooks/useLeads";
+import { dummyLeads } from "../data/dummy-leads";
 import { ArrowLeft, Edit2, Printer, Trash2 } from "lucide-react";
 
 export function ViewLead() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { getLeadById, deleteLead } = useLeads();
   const [deleteDialog, setDeleteDialog] = useState({ open: false });
   const [isDeleting, setIsDeleting] = useState(false);
 
   const lead = useMemo(() => {
-    return id ? getLeadById(id) : null;
-  }, [id, getLeadById]);
+    return id ? dummyLeads.find(lead => lead.id === id) : null;
+  }, [id]);
 
   const handlePrint = () => {
     window.print();

@@ -1,25 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
-import { EmployeeForm } from "../components";
-import { useEmployees } from "../hooks/useEmployees";
+import { EmployeeForm } from "../forms/EmployeeForm";
 import { FormModal } from "@/components/common/FormModal";
+import { dummyEmployees } from "../data/dummy-employees";
 
 export function EditEmployee() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const { getEmployeeById, updateEmployee } = useEmployees();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const employee = useMemo(() => {
-    return id ? getEmployeeById(id) : null;
-  }, [id, getEmployeeById]);
+    return id ? dummyEmployees.find(emp => emp.id === id) : null;
+  }, [id]);
 
   const handleSubmit = async (data: any) => {
     if (!id) return;
 
     try {
       setIsSubmitting(true);
-      await updateEmployee(id, data);
+      // TODO: Use useSubmit hook for API call
+      console.log("Update employee:", data);
       navigate(`/employees/${id}`);
     } catch (error) {
       console.error("Failed to update employee:", error);

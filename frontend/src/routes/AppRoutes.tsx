@@ -12,7 +12,7 @@ import {
 
 import {
   Employees,
-  AddEmployee,
+  
   EditEmployee,
   ViewEmployee,
 } from "../features/employees/pages";
@@ -28,6 +28,7 @@ import {
 
 import CustomerDetails from "@/features/customers/pages/CustomerDetails";
 import Dashboard from "@/pages/dashboard/Dashboard";
+import AddEmployee from "@/features/employees/pages/AddEmployee";
 
 const AppRoutes: React.FC = () => {
   return (

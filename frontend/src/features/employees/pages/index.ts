@@ -1,4 +1,4 @@
-export { EmployeeList, EmployeeList as Employees } from "./Employees";
-export { AddEmployee } from "./AddEmployee";
-export { EditEmployee } from "./EditEmployee";
+export { default as Employees } from "./Employees";
+export {  default as addEmployee} from "./AddEmployee";
+export { default as EditEmployee } from "./EditEmployee";
 export { ViewEmployee } from "./ViewEmployee";

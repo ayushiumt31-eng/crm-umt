@@ -40,12 +40,19 @@ export const sidebarMenu: SidebarGroup[] = [
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
       {
-        id: 2,
-        title: "Leads",
-        path: "/leads",
+        id: 1,
+        title: "Lead",
+        path: "/lead",
         icon: Zap,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
+      // {
+      //   id: 2,
+      //   title: "Leads",
+      //   path: "/leads",
+      //   icon: Zap,
+      //   roles: ["SUPER_ADMIN", "ADMIN"],
+      // },
     ],
   },
 

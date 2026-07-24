@@ -1,0 +1,120 @@
+import type { FormField } from "@/components/common/DataForm";
+
+export const activityFields: FormField[] = [
+  {
+    name: "title",
+    label: "Activity Title",
+    type: "text",
+    placeholder: "e.g., Follow up with customer",
+    required: true,
+  },
+  {
+    name: "type",
+    label: "Activity Type",
+    type: "select",
+    required: true,
+    options: [
+      { label: "Call", value: "CALL" },
+      { label: "Meeting", value: "MEETING" },
+      { label: "Follow Up", value: "FOLLOW_UP" },
+      { label: "Email", value: "EMAIL" },
+      { label: "Other", value: "OTHER" },
+    ],
+  },
+  {
+    name: "priority",
+    label: "Priority",
+    type: "select",
+    required: true,
+    options: [
+      { label: "Low", value: "LOW" },
+      { label: "Medium", value: "MEDIUM" },
+      { label: "High", value: "HIGH" },
+    ],
+  },
+  {
+    name: "status",
+    label: "Status",
+    type: "select",
+    required: true,
+    options: [
+      { label: "Pending", value: "PENDING" },
+      { label: "In Progress", value: "IN_PROGRESS" },
+      { label: "Completed", value: "COMPLETED" },
+      { label: "Cancelled", value: "CANCELLED" },
+    ],
+  },
+  {
+    name: "customerId",
+    label: "Customer",
+    type: "select",
+    options: [
+      { label: "None", value: "" },
+      { label: "Acme Corp", value: "cust-001" },
+      { label: "Global Tech", value: "cust-002" },
+      { label: "Healthcare Plus", value: "cust-003" },
+      { label: "EduCorp", value: "cust-004" },
+      { label: "Stark Industries", value: "cust-005" },
+    ],
+  },
+  {
+    name: "leadId",
+    label: "Lead (Optional)",
+    type: "select",
+    options: [
+      { label: "None", value: "" },
+      { label: "Rahul Sharma - Sharma Enterprises", value: "lead-001" },
+      { label: "Priya Verma - Verma Technologies", value: "lead-002" },
+      { label: "Amit Gupta - Gupta Solutions", value: "lead-003" },
+    ],
+  },
+  {
+    name: "dealId",
+    label: "Deal / Opportunity (Optional)",
+    type: "select",
+    options: [
+      { label: "None", value: "" },
+      { label: "Enterprise Software License", value: "DL-001" },
+      { label: "Cloud Migration Services", value: "DL-002" },
+      { label: "Annual Support Contract", value: "DL-003" },
+      { label: "Security Assessment", value: "DL-004" },
+    ],
+  },
+  {
+    name: "assignedTo",
+    label: "Assigned To",
+    type: "select",
+    required: true,
+    options: [
+      { label: "Rahul Sharma", value: "emp-001" },
+      { label: "Priya Verma", value: "emp-002" },
+      { label: "Amit Kumar", value: "emp-003" },
+      { label: "Neha Gupta", value: "emp-004" },
+      { label: "Vikas Mehta", value: "emp-005" },
+      { label: "Anjali Singh", value: "emp-006" },
+      { label: "Rohit Yadav", value: "emp-007" },
+      { label: "Simran Kaur", value: "emp-008" },
+    ],
+  },
+  {
+    name: "dueDate",
+    label: "Due Date",
+    type: "text",
+    placeholder: "YYYY-MM-DD",
+    required: true,
+  },
+  {
+    name: "dueTime",
+    label: "Due Time (Optional)",
+    type: "text",
+    placeholder: "e.g., 14:30",
+  },
+  {
+    name: "description",
+    label: "Description",
+    type: "textarea",
+    placeholder: "Describe the activity details...",
+    fullWidth: true,
+  },
+];
+

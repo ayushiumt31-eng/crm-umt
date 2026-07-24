@@ -35,6 +35,8 @@ import EditRole from "@/features/roles-permissions/pages/EditRole";
 import { ViewRoles } from "@/features/roles-permissions/pages/RoleDetails";
 // import RolesPermissions from "@/features/roles-permissions/pages/Roles";
 
+import { Deals, AddDeal, EditDeal, DealDetails } from "@/features/deals/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -62,6 +64,12 @@ const AppRoutes: React.FC = () => {
           <Route path="/lead/add" element={<AddLead />} />
           <Route path="/lead/:id" element={<LeadDetails />} />
           <Route path="/lead/:id/edit" element={<EditLead />} />
+
+          {/* Deals */}
+          <Route path="/deals" element={<Deals />} />
+          <Route path="/deals/add" element={<AddDeal />} />
+          <Route path="/deals/:id" element={<DealDetails />} />
+          <Route path="/deals/:id/edit" element={<EditDeal />} />
 
           {/* Employees */}
           <Route path="/employees" element={<Employees />} />

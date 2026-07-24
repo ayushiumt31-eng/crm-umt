@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   Handshake,
   Receipt,
+  ClipboardList,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -63,6 +64,13 @@ export const sidebarMenu: SidebarGroup[] = [
        title: "Sales",
        path: "/sales",
        icon: Receipt,
+       roles: ["SUPER_ADMIN", "ADMIN", "USER"],
+     },
+     {
+       id: 5,
+       title: "Activities / Tasks",
+       path: "/activities",
+       icon: ClipboardList,
        roles: ["SUPER_ADMIN", "ADMIN", "USER"],
      },
     ],

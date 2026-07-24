@@ -29,6 +29,11 @@ import {
 import CustomerDetails from "@/features/customers/pages/CustomerDetails";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import AddEmployee from "@/features/employees/pages/AddEmployee";
+import RolesPermissions from "@/features/roles-permissions/pages/Roles";
+import AddRole from "@/features/roles-permissions/pages/AddRole";
+import EditRole from "@/features/roles-permissions/pages/EditRole";
+import { ViewRoles } from "@/features/roles-permissions/pages/RoleDetails";
+// import RolesPermissions from "@/features/roles-permissions/pages/Roles";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -63,6 +68,12 @@ const AppRoutes: React.FC = () => {
           <Route path="/employees/add" element={<AddEmployee />} />
           <Route path="/employees/:id" element={<ViewEmployee />} />
           <Route path="/employees/:id/edit" element={<EditEmployee />} />
+
+          {/* roles &permission */}
+          <Route path="/roles-permissions" element={<RolesPermissions />} />
+          <Route path="/roles-permissions/add" element={<AddRole />} />
+          <Route path="/roles-permissions/:id" element={<ViewRoles />} />
+          <Route path="/roles-permissions/:id/edit" element={<EditRole />} />
         </Route>
       </Routes>
     </Router>

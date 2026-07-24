@@ -7,11 +7,13 @@ import {
   BarChart3,
   Settings,
   Zap,
+  ShieldCheck,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
 
 export const sidebarMenu: SidebarGroup[] = [
+  // Dashboard
   {
     id: 1,
     title: "Dashboard",
@@ -27,57 +29,53 @@ export const sidebarMenu: SidebarGroup[] = [
     ],
   },
 
+  // CRM
   {
     id: 2,
     title: "CRM",
-    roles: ["SUPER_ADMIN", "ADMIN"],
+    roles: ["SUPER_ADMIN", "ADMIN", "USER"],
     children: [
       {
         id: 1,
         title: "Customers",
         path: "/customers",
         icon: Users,
-        roles: ["SUPER_ADMIN", "ADMIN"],
+        roles: ["SUPER_ADMIN", "ADMIN", "USER"],
       },
       {
-        id: 1,
+        id: 2,
         title: "Lead",
         path: "/lead",
         icon: Zap,
-        roles: ["SUPER_ADMIN", "ADMIN"],
+        roles: ["SUPER_ADMIN", "ADMIN", "USER"],
       },
-      // {
-      //   id: 2,
-      //   title: "Leads",
-      //   path: "/leads",
-      //   icon: Zap,
-      //   roles: ["SUPER_ADMIN", "ADMIN"],
-      // },
     ],
   },
 
+  // HR
   {
     id: 3,
     title: "HR",
-    roles: ["SUPER_ADMIN"],
+    roles: ["SUPER_ADMIN", "ADMIN"],
     children: [
       {
         id: 1,
         title: "Employees",
         path: "/employees",
         icon: UserRound,
-        roles: ["SUPER_ADMIN"],
+        roles: ["SUPER_ADMIN", "ADMIN"],
       },
       {
         id: 2,
         title: "Payroll",
         path: "/payroll",
         icon: Wallet,
-        roles: ["SUPER_ADMIN"],
+        roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],
   },
 
+  // Marketing
   {
     id: 4,
     title: "Marketing",
@@ -93,6 +91,7 @@ export const sidebarMenu: SidebarGroup[] = [
     ],
   },
 
+  // Reports
   {
     id: 5,
     title: "Reports",
@@ -108,17 +107,25 @@ export const sidebarMenu: SidebarGroup[] = [
     ],
   },
 
+  // Settings
   {
     id: 6,
     title: "Settings",
-    roles: ["SUPER_ADMIN"],
+    roles: ["SUPER_ADMIN", "ADMIN"],
     children: [
       {
         id: 1,
         title: "Settings",
         path: "/settings",
         icon: Settings,
-        roles: ["SUPER_ADMIN"],
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 2,
+        title: "Roles & Permissions",
+        path: "/roles-permissions",
+        icon: ShieldCheck,
+        roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],
   },

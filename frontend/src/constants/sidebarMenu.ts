@@ -8,6 +8,7 @@ import {
   Settings,
   Zap,
   ShieldCheck,
+  Handshake,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -49,6 +50,13 @@ export const sidebarMenu: SidebarGroup[] = [
         icon: Zap,
         roles: ["SUPER_ADMIN", "ADMIN", "USER"],
       },
+       {
+      id: 3,
+      title: "Deals / Opportunities",
+      path: "/deals",
+      icon: Handshake,
+      roles: ["SUPER_ADMIN", "ADMIN", "USER"],
+    },
     ],
   },
 

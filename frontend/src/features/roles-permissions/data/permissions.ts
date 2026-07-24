@@ -22,6 +22,17 @@ export const permissionModules = [
   },
 
   {
+    key: "sales",
+    label: "Sales",
+    permissions: [
+      { key: "sales.view", label: "View" },
+      { key: "sales.create", label: "Create" },
+      { key: "sales.edit", label: "Edit" },
+      { key: "sales.delete", label: "Delete" },
+    ],
+  },
+
+  {
     key: "employees",
     label: "Employees",
     permissions: [

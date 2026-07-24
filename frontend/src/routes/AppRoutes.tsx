@@ -36,6 +36,7 @@ import { ViewRoles } from "@/features/roles-permissions/pages/RoleDetails";
 // import RolesPermissions from "@/features/roles-permissions/pages/Roles";
 
 import { Deals, AddDeal, EditDeal, DealDetails } from "@/features/deals/pages";
+import { Sales, AddSale, EditSale, SaleDetails } from "@/features/sales/pages";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -70,6 +71,12 @@ const AppRoutes: React.FC = () => {
           <Route path="/deals/add" element={<AddDeal />} />
           <Route path="/deals/:id" element={<DealDetails />} />
           <Route path="/deals/:id/edit" element={<EditDeal />} />
+
+          {/* Sales */}
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/sales/add" element={<AddSale />} />
+          <Route path="/sales/:id" element={<SaleDetails />} />
+          <Route path="/sales/:id/edit" element={<EditSale />} />
 
           {/* Employees */}
           <Route path="/employees" element={<Employees />} />

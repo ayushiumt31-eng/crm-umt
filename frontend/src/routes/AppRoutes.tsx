@@ -71,6 +71,18 @@ import {
   EmailHistory,
 } from "@/features/email-marketing/pages";
 
+import {
+  WhatsAppMarketing,
+  WhatsAppCampaigns,
+  AddWhatsAppCampaign,
+  EditWhatsAppCampaign,
+  WhatsAppCampaignDetails,
+  WhatsAppTemplates,
+  AddWhatsAppTemplate,
+  EditWhatsAppTemplate,
+  WhatsAppHistory,
+} from "@/features/whatsapp/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -155,6 +167,17 @@ const AppRoutes: React.FC = () => {
           <Route path="/roles-permissions/add" element={<AddRole />} />
           <Route path="/roles-permissions/:id" element={<ViewRoles />} />
           <Route path="/roles-permissions/:id/edit" element={<EditRole />} />
+
+          {/* WhatsApp Marketing */}
+          <Route path="/marketing/whatsapp" element={<WhatsAppMarketing />} />
+          <Route path="/marketing/whatsapp/campaigns" element={<WhatsAppCampaigns />} />
+          <Route path="/marketing/whatsapp/campaigns/add" element={<AddWhatsAppCampaign />} />
+          <Route path="/marketing/whatsapp/campaigns/:id" element={<WhatsAppCampaignDetails />} />
+          <Route path="/marketing/whatsapp/campaigns/:id/edit" element={<EditWhatsAppCampaign />} />
+          <Route path="/marketing/whatsapp/templates" element={<WhatsAppTemplates />} />
+          <Route path="/marketing/whatsapp/templates/add" element={<AddWhatsAppTemplate />} />
+          <Route path="/marketing/whatsapp/templates/:id/edit" element={<EditWhatsAppTemplate />} />
+          <Route path="/marketing/whatsapp/history" element={<WhatsAppHistory />} />
         </Route>
       </Routes>
     </Router>

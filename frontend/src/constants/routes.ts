@@ -77,6 +77,23 @@ MARKETING: {
     HISTORY: "/marketing/email-marketing/history",
   } as const,
 
+  WHATSAPP: {
+    HOME: "/marketing/whatsapp",
+    CAMPAIGNS: {
+      LIST: "/marketing/whatsapp/campaigns",
+      ADD: "/marketing/whatsapp/campaigns/add",
+      VIEW: (id: string) => `/marketing/whatsapp/campaigns/${id}`,
+      EDIT: (id: string) => `/marketing/whatsapp/campaigns/${id}/edit`,
+    },
+    TEMPLATES: {
+      LIST: "/marketing/whatsapp/templates",
+      ADD: "/marketing/whatsapp/templates/add",
+      VIEW: (id: string) => `/marketing/whatsapp/templates/${id}`,
+      EDIT: (id: string) => `/marketing/whatsapp/templates/${id}/edit`,
+    },
+    HISTORY: "/marketing/whatsapp/history",
+  } as const,
+
   REPORTS: {
     LIST: "/reports",
   } as const,

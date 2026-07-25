@@ -128,6 +128,13 @@ export const sidebarMenu: SidebarGroup[] = [
         icon: Mail,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
+      {
+        id: 3,
+        title: "WhatsApp Marketing",
+        path: "/marketing/whatsapp",
+        icon: MessageCircle,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
     ],
   },
 

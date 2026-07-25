@@ -54,7 +54,10 @@ export const ROUTES = {
   } as const,
 
   MARKETING: {
-    LIST: "/marketing",
+    LIST: "/marketing/campaigns",
+    ADD: "/marketing/campaigns/add",
+    VIEW: (id: string) => `/marketing/campaigns/${id}`,
+    EDIT: (id: string) => `/marketing/campaigns/${id}/edit`,
   } as const,
 
   REPORTS: {

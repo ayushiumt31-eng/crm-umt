@@ -51,6 +51,13 @@ import CommunicationDetails from "@/features/communication/pages/CommunicationDe
 
 import Reports from "@/features/reports/pages/Reports";
 
+import {
+  Campaigns,
+  AddCampaign,
+  EditCampaign,
+  CampaignDetails,
+} from "@/features/marketing/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -111,6 +118,12 @@ const AppRoutes: React.FC = () => {
           <Route path="/employees/add" element={<AddEmployee />} />
           <Route path="/employees/:id" element={<ViewEmployee />} />
           <Route path="/employees/:id/edit" element={<EditEmployee />} />
+
+          {/* Marketing Campaigns */}
+          <Route path="/marketing/campaigns" element={<Campaigns />} />
+          <Route path="/marketing/campaigns/add" element={<AddCampaign />} />
+          <Route path="/marketing/campaigns/:id" element={<CampaignDetails />} />
+          <Route path="/marketing/campaigns/:id/edit" element={<EditCampaign />} />
 
           {/* roles &permission */}
           <Route path="/roles-permissions" element={<RolesPermissions />} />

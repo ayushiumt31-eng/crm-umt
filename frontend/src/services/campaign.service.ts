@@ -1,11 +1,3 @@
-import { LocalDataService } from "./baseService";
-import type { Campaign } from "@/types/marketing";
-import { dummyCampaigns } from "@/data/campaigns";
+// Re-export the campaign service from the feature module
+export { campaignService } from "@/features/marketing/services/campaignService";
 
-class CampaignService extends LocalDataService<Campaign> {
-  getDummyData(): Campaign[] {
-    return dummyCampaigns;
-  }
-}
-
-export const campaignService = new CampaignService();

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Search, Filter, DollarSign, Receipt, Clock, TrendingUp } from "lucide-react";
+import { Plus, Search, Filter, DollarSign, Receipt, Clock, TrendingUp, Upload } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/common/DataTable";
@@ -8,12 +8,15 @@ import { getSalesColumns } from "../components/SalesTableColumns";
 import { dummySales } from "../data/dummy-sales";
 import type { Sale } from "../types/sale";
 import { DeleteSaleDialog } from "../components/DeleteSaleDialog";
+import { BulkImport } from "@/components/common/bulk-import/BulkImport";
+import { salesImportConfig } from "@/components/common/bulk-import/configs/salesImportConfig";
 
 export default function Sales() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [deleteSale, setDeleteSale] = useState<Sale | null>(null);
   const [salesData, setSalesData] = useState<Sale[]>(dummySales);
+  const [bulkImportOpen, setBulkImportOpen] = useState(false);
 
   const filteredSales = useMemo(() => {
     return salesData.filter((sale) => {
@@ -115,10 +118,20 @@ export default function Sales() {
                 {filteredSales.length} results
               </span>
             </div>
-            <Button onClick={() => navigate("/sales/add")} className="gap-2">
-              <Plus className="h-4 w-4" />
-              Add Sale
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                onClick={() => setBulkImportOpen(true)}
+                className="gap-2"
+              >
+                <Upload className="h-4 w-4" />
+                Bulk Import
+              </Button>
+              <Button onClick={() => navigate("/sales/add")} className="gap-2">
+                <Plus className="h-4 w-4" />
+                Add Sale
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -164,6 +177,16 @@ export default function Sales() {
         isOpen={!!deleteSale}
         onClose={() => setDeleteSale(null)}
         onConfirm={handleDeleteConfirm}
+      />
+
+      {/* Bulk Import Modal */}
+      <BulkImport
+        isOpen={bulkImportOpen}
+        onClose={() => setBulkImportOpen(false)}
+        module="sales"
+        onImport={salesImportConfig.onImport}
+        existingEmails={salesImportConfig.getExistingData?.().emails ?? []}
+        existingPhones={salesImportConfig.getExistingData?.().phones ?? []}
       />
     </div>
   );

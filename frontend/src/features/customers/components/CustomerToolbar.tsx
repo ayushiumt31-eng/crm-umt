@@ -1,15 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Plus } from "lucide-react";
+import { Search, Plus, Upload } from "lucide-react";
 
 interface CustomerToolbarProps {
   onSearch?: (query: string) => void;
   onAdd?: () => void;
+  onBulkImport?: () => void;
 }
 
 export function CustomerToolbar({
   onSearch,
   onAdd,
+  onBulkImport,
 }: CustomerToolbarProps) {
   return (
     <div className="space-y-4">
@@ -32,14 +34,24 @@ export function CustomerToolbar({
           </div>
         </div>
 
-        {/* Add Customer Button */}
-        <Button
-          onClick={onAdd}
-          className="flex items-center gap-2 whitespace-nowrap bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 border border-blue-700/50"
-        >
-          <Plus className="h-5 w-5" />
-          Add Customer
-        </Button>
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={onBulkImport}
+            variant="outline"
+            className="flex items-center gap-2 whitespace-nowrap font-semibold px-5 py-3 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border-slate-300 dark:border-slate-600"
+          >
+            <Upload className="h-5 w-5" />
+            Bulk Import
+          </Button>
+          <Button
+            onClick={onAdd}
+            className="flex items-center gap-2 whitespace-nowrap bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 border border-blue-700/50"
+          >
+            <Plus className="h-5 w-5" />
+            Add Customer
+          </Button>
+        </div>
       </div>
 
       {/* Quick Filter Info */}

@@ -11,6 +11,7 @@ import {
   Handshake,
   Receipt,
   ClipboardList,
+  MessageCircle,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -66,11 +67,18 @@ export const sidebarMenu: SidebarGroup[] = [
        icon: Receipt,
        roles: ["SUPER_ADMIN", "ADMIN", "USER"],
      },
-     {
+      {
        id: 5,
        title: "Activities / Tasks",
        path: "/activities",
        icon: ClipboardList,
+       roles: ["SUPER_ADMIN", "ADMIN", "USER"],
+     },
+     {
+       id: 6,
+       title: "Communications",
+       path: "/communications",
+       icon: MessageCircle,
        roles: ["SUPER_ADMIN", "ADMIN", "USER"],
      },
     ],

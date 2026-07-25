@@ -49,6 +49,8 @@ import AddCommunication from "@/features/communication/pages/AddCommunication";
 import EditCommunication from "@/features/communication/pages/EditCommunication";
 import CommunicationDetails from "@/features/communication/pages/CommunicationDetails";
 
+import Reports from "@/features/reports/pages/Reports";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -100,6 +102,9 @@ const AppRoutes: React.FC = () => {
           <Route path="/communications/add" element={<AddCommunication />} />
           <Route path="/communications/:id" element={<CommunicationDetails />} />
           <Route path="/communications/:id/edit" element={<EditCommunication />} />
+
+          {/* Reports */}
+          <Route path="/reports" element={<Reports />} />
 
           {/* Employees */}
           <Route path="/employees" element={<Employees />} />

@@ -55,13 +55,13 @@ export const permissionModules = [
   },
 
   {
-    key: "marketing",
-    label: "Marketing",
+    key: "marketing-campaigns",
+    label: "Marketing Campaigns",
     permissions: [
-      { key: "marketing.view", label: "View" },
-      { key: "marketing.create", label: "Create" },
-      { key: "marketing.edit", label: "Edit" },
-      { key: "marketing.delete", label: "Delete" },
+      { key: "marketing.campaign.view", label: "View" },
+      { key: "marketing.campaign.create", label: "Create" },
+      { key: "marketing.campaign.update", label: "Update" },
+      { key: "marketing.campaign.delete", label: "Delete" },
     ],
   },
 

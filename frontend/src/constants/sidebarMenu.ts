@@ -115,8 +115,8 @@ export const sidebarMenu: SidebarGroup[] = [
     children: [
       {
         id: 1,
-        title: "Marketing",
-        path: "/marketing",
+        title: "Campaigns",
+        path: "/marketing/campaigns",
         icon: Megaphone,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataTable } from "@/components/common/DataTable";
 import { CustomerToolbar } from "@/features/customers/components/CustomerToolbar";
@@ -7,6 +7,8 @@ import { dummyCustomers } from "../data/dummy-customers";
 import { useDebounce } from "@/hooks";
 import type { Customer } from "../types/customer";
 import { Users, TrendingUp, UserCheck, UserPlus, Activity } from "lucide-react";
+import { BulkImport } from "@/components/common/bulk-import/BulkImport";
+import { customerImportConfig, getCustomerExistingData } from "@/components/common/bulk-import/configs/customerImportConfig";
 
 export default function Customers() {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ export default function Customers() {
   const [searchQuery, setSearchQuery] = useState("");
   const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; id?: string; name?: string }>({ open: false });
   const [isDeleting, setIsDeleting] = useState(false);
+  const [bulkImportOpen, setBulkImportOpen] = useState(false);
   const debouncedSearch = useDebounce(searchQuery, 300);
 
   // Filter customers based on search query
@@ -142,7 +145,7 @@ export default function Customers() {
       </div>
 
       {/* Toolbar */}
-      <CustomerToolbar onSearch={setSearchQuery} onAdd={handleAdd} />
+      <CustomerToolbar onSearch={setSearchQuery} onAdd={handleAdd} onBulkImport={() => setBulkImportOpen(true)} />
 
       {/* Table with enhanced styling */}
       <div className="rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
@@ -233,6 +236,16 @@ export default function Customers() {
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
         isLoading={isDeleting}
+      />
+
+      {/* Bulk Import Modal */}
+      <BulkImport
+        isOpen={bulkImportOpen}
+        onClose={() => setBulkImportOpen(false)}
+        module="customers"
+        onImport={customerImportConfig.onImport}
+        existingEmails={getCustomerExistingData().emails}
+        existingPhones={getCustomerExistingData().phones}
       />
     </div>
   );

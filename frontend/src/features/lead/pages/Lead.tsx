@@ -8,6 +8,8 @@ import { Users, TrendingUp, UserCheck, UserPlus, Mail, Phone } from "lucide-reac
 import { dummyLead } from "../data/dummy-lead";
 import { leadTableColumns } from "../components/LeadTableColumns";
 import { LeadToolbar } from "../components/LeadToolbar";
+import { BulkImport } from "@/components/common/bulk-import/BulkImport";
+import { leadImportConfig, getLeadExistingData } from "@/components/common/bulk-import/configs/leadImportConfig";
 
 export default function Lead() {
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ export default function Lead() {
     const [searchQuery, setSearchQuery] = useState("");
     const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; id?: string; name?: string }>({ open: false });
     const [isDeleting, setIsDeleting] = useState(false);
+    const [bulkImportOpen, setBulkImportOpen] = useState(false);
     const debouncedSearch = useDebounce(searchQuery, 300);
 
     // Filter leads based on search query
@@ -146,7 +149,7 @@ export default function Lead() {
             </div>
 
             {/* Toolbar */}
-            <LeadToolbar onSearch={setSearchQuery} onAdd={handleAdd} />
+            <LeadToolbar onSearch={setSearchQuery} onAdd={handleAdd} onBulkImport={() => setBulkImportOpen(true)} />
 
             {/* Table with enhanced styling */}
             <div className="rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
@@ -203,6 +206,16 @@ export default function Lead() {
                 onConfirm={handleConfirmDelete}
                 onCancel={handleCancelDelete}
                 isLoading={isDeleting}
+            />
+
+            {/* Bulk Import Modal */}
+            <BulkImport
+                isOpen={bulkImportOpen}
+                onClose={() => setBulkImportOpen(false)}
+                module="leads"
+                onImport={leadImportConfig.onImport}
+                existingEmails={getLeadExistingData().emails}
+                existingPhones={getLeadExistingData().phones}
             />
         </div>
     );

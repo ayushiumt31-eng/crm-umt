@@ -53,11 +53,28 @@ export const ROUTES = {
     LIST: "/sales",
   } as const,
 
-  MARKETING: {
+MARKETING: {
     LIST: "/marketing/campaigns",
     ADD: "/marketing/campaigns/add",
     VIEW: (id: string) => `/marketing/campaigns/${id}`,
     EDIT: (id: string) => `/marketing/campaigns/${id}/edit`,
+  } as const,
+
+  EMAIL_MARKETING: {
+    HOME: "/marketing/email-marketing",
+    CAMPAIGNS: {
+      LIST: "/marketing/email-marketing/campaigns",
+      ADD: "/marketing/email-marketing/campaigns/add",
+      VIEW: (id: string) => `/marketing/email-marketing/campaigns/${id}`,
+      EDIT: (id: string) => `/marketing/email-marketing/campaigns/${id}/edit`,
+    },
+    TEMPLATES: {
+      LIST: "/marketing/email-marketing/templates",
+      ADD: "/marketing/email-marketing/templates/add",
+      VIEW: (id: string) => `/marketing/email-marketing/templates/${id}`,
+      EDIT: (id: string) => `/marketing/email-marketing/templates/${id}/edit`,
+    },
+    HISTORY: "/marketing/email-marketing/history",
   } as const,
 
   REPORTS: {

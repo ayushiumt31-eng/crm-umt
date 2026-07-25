@@ -12,6 +12,7 @@ import {
   Receipt,
   ClipboardList,
   MessageCircle,
+  Mail,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -107,7 +108,7 @@ export const sidebarMenu: SidebarGroup[] = [
     ],
   },
 
-  // Marketing
+// Marketing
   {
     id: 4,
     title: "Marketing",
@@ -118,6 +119,13 @@ export const sidebarMenu: SidebarGroup[] = [
         title: "Campaigns",
         path: "/marketing/campaigns",
         icon: Megaphone,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 2,
+        title: "Email Marketing",
+        path: "/marketing/email-marketing",
+        icon: Mail,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],

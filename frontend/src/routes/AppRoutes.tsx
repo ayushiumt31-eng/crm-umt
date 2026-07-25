@@ -44,6 +44,11 @@ import {
   ActivityDetails,
 } from "@/features/activities/pages";
 
+import Communications from "@/features/communication/pages/Communications";
+import AddCommunication from "@/features/communication/pages/AddCommunication";
+import EditCommunication from "@/features/communication/pages/EditCommunication";
+import CommunicationDetails from "@/features/communication/pages/CommunicationDetails";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -89,6 +94,12 @@ const AppRoutes: React.FC = () => {
           <Route path="/activities/add" element={<AddActivity />} />
           <Route path="/activities/:id" element={<ActivityDetails />} />
           <Route path="/activities/:id/edit" element={<EditActivity />} />
+
+          {/* Communications */}
+          <Route path="/communications" element={<Communications />} />
+          <Route path="/communications/add" element={<AddCommunication />} />
+          <Route path="/communications/:id" element={<CommunicationDetails />} />
+          <Route path="/communications/:id/edit" element={<EditCommunication />} />
 
           {/* Employees */}
           <Route path="/employees" element={<Employees />} />

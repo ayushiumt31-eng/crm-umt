@@ -73,4 +73,15 @@ export const permissionModules = [
       { key: "report.export", label: "Export" },
     ],
   },
+
+  {
+    key: "communications",
+    label: "Communications",
+    permissions: [
+      { key: "communication.view", label: "View" },
+      { key: "communication.create", label: "Create" },
+      { key: "communication.edit", label: "Edit" },
+      { key: "communication.delete", label: "Delete" },
+    ],
+  },
 ];

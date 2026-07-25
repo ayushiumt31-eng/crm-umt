@@ -58,6 +58,19 @@ import {
   CampaignDetails,
 } from "@/features/marketing/pages";
 
+import {
+  EmailMarketing,
+  EmailCampaigns,
+  AddEmailCampaign,
+  EditEmailCampaign,
+  EmailCampaignDetails,
+  EmailTemplates,
+  EmailTemplateDetails,
+  AddEmailTemplate,
+  EditEmailTemplate,
+  EmailHistory,
+} from "@/features/email-marketing/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -119,11 +132,23 @@ const AppRoutes: React.FC = () => {
           <Route path="/employees/:id" element={<ViewEmployee />} />
           <Route path="/employees/:id/edit" element={<EditEmployee />} />
 
-          {/* Marketing Campaigns */}
+{/* Marketing Campaigns */}
           <Route path="/marketing/campaigns" element={<Campaigns />} />
           <Route path="/marketing/campaigns/add" element={<AddCampaign />} />
           <Route path="/marketing/campaigns/:id" element={<CampaignDetails />} />
           <Route path="/marketing/campaigns/:id/edit" element={<EditCampaign />} />
+
+          {/* Email Marketing */}
+          <Route path="/marketing/email-marketing" element={<EmailMarketing />} />
+          <Route path="/marketing/email-marketing/campaigns" element={<EmailCampaigns />} />
+          <Route path="/marketing/email-marketing/campaigns/add" element={<AddEmailCampaign />} />
+          <Route path="/marketing/email-marketing/campaigns/:id" element={<EmailCampaignDetails />} />
+          <Route path="/marketing/email-marketing/campaigns/:id/edit" element={<EditEmailCampaign />} />
+          <Route path="/marketing/email-marketing/templates" element={<EmailTemplates />} />
+          <Route path="/marketing/email-marketing/templates/add" element={<AddEmailTemplate />} />
+          <Route path="/marketing/email-marketing/templates/:id" element={<EmailTemplateDetails />} />
+          <Route path="/marketing/email-marketing/templates/:id/edit" element={<EditEmailTemplate />} />
+          <Route path="/marketing/email-marketing/history" element={<EmailHistory />} />
 
           {/* roles &permission */}
           <Route path="/roles-permissions" element={<RolesPermissions />} />

@@ -54,7 +54,7 @@ export const permissionModules = [
     ],
   },
 
-  {
+{
     key: "marketing-campaigns",
     label: "Marketing Campaigns",
     permissions: [
@@ -62,6 +62,19 @@ export const permissionModules = [
       { key: "marketing.campaign.create", label: "Create" },
       { key: "marketing.campaign.update", label: "Update" },
       { key: "marketing.campaign.delete", label: "Delete" },
+    ],
+  },
+
+  {
+    key: "marketing-email",
+    label: "Email Marketing",
+    permissions: [
+      { key: "marketing.email.view", label: "View" },
+      { key: "marketing.email.create", label: "Create" },
+      { key: "marketing.email.update", label: "Update" },
+      { key: "marketing.email.delete", label: "Delete" },
+      { key: "marketing.email.send", label: "Send" },
+      { key: "marketing.email.export", label: "Export" },
     ],
   },
 

@@ -111,6 +111,13 @@ export const ROUTES = {
     HISTORY: "/marketing/social-media/history",
   } as const,
 
+  MARKETING_REPORTS: {
+    HOME: "/marketing/reports",
+    CAMPAIGNS: "/marketing/reports/campaigns",
+    CHANNELS: "/marketing/reports/channels",
+    DETAIL: (id: string) => `/marketing/reports/${id}`,
+  } as const,
+
   ADS: {
     HOME: "/marketing/ads",
     CAMPAIGNS: {

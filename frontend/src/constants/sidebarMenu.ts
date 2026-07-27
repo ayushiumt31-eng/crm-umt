@@ -154,6 +154,13 @@ export const sidebarMenu: SidebarGroup[] = [
       },
       {
         id: 6,
+        title: "Marketing Reports",
+        path: "/marketing/reports",
+        icon: BarChart3,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 6,
         title: "Marketing Automation",
         path: "/marketing/automation",
         icon: Workflow,

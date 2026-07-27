@@ -111,7 +111,7 @@ export const permissionModules = [
     ],
   },
 
-  {
+{
     key: "ads",
     label: "Ads / Meta Ads",
     permissions: [
@@ -121,6 +121,20 @@ export const permissionModules = [
       { key: "marketing.ads.delete", label: "Delete" },
       { key: "marketing.ads.publish", label: "Publish" },
       { key: "marketing.ads.export", label: "Export" },
+    ],
+  },
+
+  {
+    key: "marketing-automation",
+    label: "Marketing Automation",
+    permissions: [
+      { key: "marketing.automation.view", label: "View" },
+      { key: "marketing.automation.create", label: "Create" },
+      { key: "marketing.automation.update", label: "Update" },
+      { key: "marketing.automation.delete", label: "Delete" },
+      { key: "marketing.automation.activate", label: "Activate/Deactivate" },
+      { key: "marketing.automation.duplicate", label: "Duplicate" },
+      { key: "marketing.automation.export", label: "Export Logs" },
     ],
   },
 ];

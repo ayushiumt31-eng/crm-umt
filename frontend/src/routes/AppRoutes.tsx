@@ -109,6 +109,16 @@ import {
   AdAnalytics,
 } from "@/features/ads/pages";
 
+import {
+  MarketingAutomation,
+  Automations,
+  AddAutomation,
+  EditAutomation,
+  AutomationDetails,
+  AutomationLogs,
+  AutomationTemplates,
+} from "@/features/marketing-automation/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -228,6 +238,15 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/ads/ads/add" element={<AddAdCreative />} />
           <Route path="/marketing/ads/history" element={<AdHistoryPage />} />
           <Route path="/marketing/ads/analytics" element={<AdAnalytics />} />
+
+          {/* Marketing Automation */}
+          <Route path="/marketing/automation" element={<MarketingAutomation />} />
+          <Route path="/marketing/automation/list" element={<Automations />} />
+          <Route path="/marketing/automation/add" element={<AddAutomation />} />
+          <Route path="/marketing/automation/:id" element={<AutomationDetails />} />
+          <Route path="/marketing/automation/:id/edit" element={<EditAutomation />} />
+          <Route path="/marketing/automation/logs" element={<AutomationLogs />} />
+          <Route path="/marketing/automation/templates" element={<AutomationTemplates />} />
         </Route>
       </Routes>
     </Router>

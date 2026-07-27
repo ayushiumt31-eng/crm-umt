@@ -131,6 +131,16 @@ export const ROUTES = {
     ANALYTICS: "/marketing/ads/analytics",
   } as const,
 
+  MARKETING_AUTOMATION: {
+    HOME: "/marketing/automation",
+    LIST: "/marketing/automation/list",
+    ADD: "/marketing/automation/add",
+    VIEW: (id: string) => `/marketing/automation/${id}`,
+    EDIT: (id: string) => `/marketing/automation/${id}/edit`,
+    LOGS: "/marketing/automation/logs",
+    TEMPLATES: "/marketing/automation/templates",
+  } as const,
+
   REPORTS: {
     LIST: "/reports",
   } as const,

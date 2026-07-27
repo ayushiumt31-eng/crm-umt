@@ -110,4 +110,17 @@ export const permissionModules = [
       { key: "marketing.social.export", label: "Export" },
     ],
   },
+
+  {
+    key: "ads",
+    label: "Ads / Meta Ads",
+    permissions: [
+      { key: "marketing.ads.view", label: "View" },
+      { key: "marketing.ads.create", label: "Create" },
+      { key: "marketing.ads.update", label: "Update" },
+      { key: "marketing.ads.delete", label: "Delete" },
+      { key: "marketing.ads.publish", label: "Publish" },
+      { key: "marketing.ads.export", label: "Export" },
+    ],
+  },
 ];

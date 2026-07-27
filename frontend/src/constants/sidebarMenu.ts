@@ -14,6 +14,7 @@ import {
   MessageCircle,
   Mail,
   Share2,
+  TrendingUp,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -141,6 +142,13 @@ export const sidebarMenu: SidebarGroup[] = [
         title: "Social Media",
         path: "/marketing/social-media",
         icon: Share2,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 5,
+        title: "Ads / Meta Ads",
+        path: "/marketing/ads",
+        icon: TrendingUp,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],

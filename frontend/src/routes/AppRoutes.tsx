@@ -95,6 +95,20 @@ import {
   SocialMediaHistory,
 } from "@/features/social-media/pages";
 
+import {
+  AdsDashboard,
+  AdCampaigns,
+  AddAdCampaign,
+  EditAdCampaign,
+  AdCampaignDetails,
+  AdSets,
+  AddAdSet,
+  Ads,
+  AddAdCreative,
+  AdHistoryPage,
+  AdAnalytics,
+} from "@/features/ads/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -197,10 +211,23 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/social-media/posts/add" element={<AddSocialPost />} />
           <Route path="/marketing/social-media/posts/:id" element={<SocialPostDetails />} />
           <Route path="/marketing/social-media/posts/:id/edit" element={<EditSocialPost />} />
-<Route path="/marketing/social-media/campaigns" element={<SocialCampaigns />} />
+          <Route path="/marketing/social-media/campaigns" element={<SocialCampaigns />} />
           <Route path="/marketing/social-media/campaigns/add" element={<AddSocialCampaign />} />
           <Route path="/marketing/social-media/campaigns/:id" element={<SocialCampaignDetails />} />
           <Route path="/marketing/social-media/history" element={<SocialMediaHistory />} />
+
+          {/* Ads / Meta Ads */}
+          <Route path="/marketing/ads" element={<AdsDashboard />} />
+          <Route path="/marketing/ads/campaigns" element={<AdCampaigns />} />
+          <Route path="/marketing/ads/campaigns/add" element={<AddAdCampaign />} />
+          <Route path="/marketing/ads/campaigns/:id" element={<AdCampaignDetails />} />
+          <Route path="/marketing/ads/campaigns/:id/edit" element={<EditAdCampaign />} />
+          <Route path="/marketing/ads/sets" element={<AdSets />} />
+          <Route path="/marketing/ads/sets/add" element={<AddAdSet />} />
+          <Route path="/marketing/ads/ads" element={<Ads />} />
+          <Route path="/marketing/ads/ads/add" element={<AddAdCreative />} />
+          <Route path="/marketing/ads/history" element={<AdHistoryPage />} />
+          <Route path="/marketing/ads/analytics" element={<AdAnalytics />} />
         </Route>
       </Routes>
     </Router>

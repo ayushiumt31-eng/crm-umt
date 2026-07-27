@@ -97,4 +97,17 @@ export const permissionModules = [
       { key: "communication.delete", label: "Delete" },
     ],
   },
+
+  {
+    key: "social-media",
+    label: "Social Media Marketing",
+    permissions: [
+      { key: "marketing.social.view", label: "View" },
+      { key: "marketing.social.create", label: "Create" },
+      { key: "marketing.social.update", label: "Update" },
+      { key: "marketing.social.delete", label: "Delete" },
+      { key: "marketing.social.publish", label: "Publish" },
+      { key: "marketing.social.export", label: "Export" },
+    ],
+  },
 ];

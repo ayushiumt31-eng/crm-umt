@@ -94,6 +94,23 @@ MARKETING: {
     HISTORY: "/marketing/whatsapp/history",
   } as const,
 
+  SOCIAL_MEDIA: {
+    HOME: "/marketing/social-media",
+    POSTS: {
+      LIST: "/marketing/social-media/posts",
+      ADD: "/marketing/social-media/posts/add",
+      VIEW: (id: string) => `/marketing/social-media/posts/${id}`,
+      EDIT: (id: string) => `/marketing/social-media/posts/${id}/edit`,
+    },
+    CAMPAIGNS: {
+      LIST: "/marketing/social-media/campaigns",
+      ADD: "/marketing/social-media/campaigns/add",
+      VIEW: (id: string) => `/marketing/social-media/campaigns/${id}`,
+      EDIT: (id: string) => `/marketing/social-media/campaigns/${id}/edit`,
+    },
+    HISTORY: "/marketing/social-media/history",
+  } as const,
+
   REPORTS: {
     LIST: "/reports",
   } as const,

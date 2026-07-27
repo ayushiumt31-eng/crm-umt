@@ -1,0 +1,83 @@
+import type { SocialCampaign } from "../types/socialCampaign";
+
+export const dummySocialCampaigns: SocialCampaign[] = [
+  {
+    id: "sc-001",
+    name: "Product Launch Q3",
+    description:
+      "Campaign to promote the new AI-powered features and product updates for Q3 2026 across all social platforms.",
+    platforms: ["FACEBOOK", "INSTAGRAM", "LINKEDIN"],
+    postIds: ["sp-001", "sp-002", "sp-008", "sp-013"],
+    totalPosts: 4,
+    startDate: "2026-08-15T00:00:00Z",
+    endDate: "2026-09-30T23:59:59Z",
+    status: "RUNNING",
+    createdBy: "emp-001",
+    createdByName: "Rahul Sharma",
+    createdAt: "2026-08-10T09:00:00Z",
+    updatedAt: "2026-08-15T08:00:00Z",
+  },
+  {
+    id: "sc-002",
+    name: "Brand Awareness Q3",
+    description:
+      "Campaign focused on increasing brand visibility and sharing company milestones and achievements.",
+    platforms: ["FACEBOOK", "LINKEDIN"],
+    postIds: ["sp-004", "sp-012"],
+    totalPosts: 2,
+    startDate: "2026-08-01T00:00:00Z",
+    endDate: "2026-08-31T23:59:59Z",
+    status: "COMPLETED",
+    createdBy: "emp-004",
+    createdByName: "Neha Gupta",
+    createdAt: "2026-07-25T10:00:00Z",
+    updatedAt: "2026-08-31T23:59:59Z",
+  },
+  {
+    id: "sc-003",
+    name: "Sustainability Campaign",
+    description:
+      "Campaign to promote environmental awareness and CRM UMT's commitment to sustainability through EV and solar energy content.",
+    platforms: ["FACEBOOK", "LINKEDIN"],
+    postIds: ["sp-006", "sp-007", "sp-014"],
+    totalPosts: 3,
+    startDate: "2026-09-01T00:00:00Z",
+    endDate: "2026-09-30T23:59:59Z",
+    status: "SCHEDULED",
+    createdBy: "emp-001",
+    createdByName: "Rahul Sharma",
+    createdAt: "2026-08-20T11:00:00Z",
+  },
+  {
+    id: "sc-004",
+    name: "Instagram Engagement Push",
+    description:
+      "Campaign aimed at increasing Instagram engagement with festival greetings, behind-the-scenes content, and feature highlights.",
+    platforms: ["INSTAGRAM"],
+    postIds: ["sp-005", "sp-008", "sp-011"],
+    totalPosts: 3,
+    startDate: "2026-08-10T00:00:00Z",
+    endDate: "2026-09-15T23:59:59Z",
+    status: "DRAFT",
+    createdBy: "emp-002",
+    createdByName: "Priya Verma",
+    createdAt: "2026-08-05T14:00:00Z",
+    notes: "Draft campaign awaiting content approval",
+  },
+  {
+    id: "sc-005",
+    name: "LinkedIn Thought Leadership",
+    description:
+      "Campaign to establish CRM UMT as a thought leader in the CRM and technology space through industry insights and company achievements.",
+    platforms: ["LINKEDIN"],
+    postIds: ["sp-002", "sp-009", "sp-015"],
+    totalPosts: 3,
+    startDate: "2026-09-01T00:00:00Z",
+    endDate: "2026-10-15T23:59:59Z",
+    status: "DRAFT",
+    createdBy: "emp-004",
+    createdByName: "Neha Gupta",
+    createdAt: "2026-08-28T10:00:00Z",
+  },
+];
+

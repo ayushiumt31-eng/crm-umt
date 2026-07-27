@@ -83,6 +83,18 @@ import {
   WhatsAppHistory,
 } from "@/features/whatsapp/pages";
 
+import {
+  SocialMedia,
+  SocialPosts,
+  AddSocialPost,
+  EditSocialPost,
+  SocialPostDetails,
+  SocialCampaigns,
+  AddSocialCampaign,
+  SocialCampaignDetails,
+  SocialMediaHistory,
+} from "@/features/social-media/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -178,6 +190,17 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/whatsapp/templates/add" element={<AddWhatsAppTemplate />} />
           <Route path="/marketing/whatsapp/templates/:id/edit" element={<EditWhatsAppTemplate />} />
           <Route path="/marketing/whatsapp/history" element={<WhatsAppHistory />} />
+
+          {/* Social Media Marketing */}
+          <Route path="/marketing/social-media" element={<SocialMedia />} />
+          <Route path="/marketing/social-media/posts" element={<SocialPosts />} />
+          <Route path="/marketing/social-media/posts/add" element={<AddSocialPost />} />
+          <Route path="/marketing/social-media/posts/:id" element={<SocialPostDetails />} />
+          <Route path="/marketing/social-media/posts/:id/edit" element={<EditSocialPost />} />
+<Route path="/marketing/social-media/campaigns" element={<SocialCampaigns />} />
+          <Route path="/marketing/social-media/campaigns/add" element={<AddSocialCampaign />} />
+          <Route path="/marketing/social-media/campaigns/:id" element={<SocialCampaignDetails />} />
+          <Route path="/marketing/social-media/history" element={<SocialMediaHistory />} />
         </Route>
       </Routes>
     </Router>

@@ -13,6 +13,7 @@ import {
   ClipboardList,
   MessageCircle,
   Mail,
+  Share2,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -133,6 +134,13 @@ export const sidebarMenu: SidebarGroup[] = [
         title: "WhatsApp Marketing",
         path: "/marketing/whatsapp",
         icon: MessageCircle,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 4,
+        title: "Social Media",
+        path: "/marketing/social-media",
+        icon: Share2,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],

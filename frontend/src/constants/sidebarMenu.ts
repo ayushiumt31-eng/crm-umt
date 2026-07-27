@@ -15,6 +15,7 @@ import {
   Mail,
   Share2,
   TrendingUp,
+  Workflow,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -149,6 +150,13 @@ export const sidebarMenu: SidebarGroup[] = [
         title: "Ads / Meta Ads",
         path: "/marketing/ads",
         icon: TrendingUp,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 6,
+        title: "Marketing Automation",
+        path: "/marketing/automation",
+        icon: Workflow,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],

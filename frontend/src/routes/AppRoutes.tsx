@@ -33,7 +33,6 @@ import RolesPermissions from "@/features/roles-permissions/pages/Roles";
 import AddRole from "@/features/roles-permissions/pages/AddRole";
 import EditRole from "@/features/roles-permissions/pages/EditRole";
 import { ViewRoles } from "@/features/roles-permissions/pages/RoleDetails";
-// import RolesPermissions from "@/features/roles-permissions/pages/Roles";
 
 import { Deals, AddDeal, EditDeal, DealDetails } from "@/features/deals/pages";
 import { Sales, AddSale, EditSale, SaleDetails } from "@/features/sales/pages";
@@ -126,74 +125,51 @@ import {
   AutomationTemplates,
 } from "@/features/marketing-automation/pages";
 
+import { PayrollList } from "@/features/payroll/pages/PayrollList";
+import { PayrollDetails } from "@/features/payroll/pages/PayrollDetails";
+import AddPayroll from "@/features/payroll/pages/AddPayroll";
+import EditPayroll from "@/features/payroll/pages/EditPayroll";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
-        <Route element={<PublicRoute />}>
-          {/* <Route element={<AuthLayout />}>
-            <Route path="/login" element={<div>Login</div>} />
-          </Route> */}
-        </Route>
-
-        {/* Protected / Dashboard Routes */}
+        <Route element={<PublicRoute />} />
         <Route element={<DashboardLayout />}>
-          {/* Dashboard */}
           <Route path="/dashboard" element={<Dashboard />} />
-
-          {/* Customers */}
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/add" element={<AddCustomer />} />
           <Route path="/customers/:id" element={<CustomerDetails />} />
           <Route path="/customers/:id/edit" element={<EditCustomer />} />
-
-          {/* Leads */}
           <Route path="/lead" element={<Lead/>} />
           <Route path="/lead/add" element={<AddLead />} />
           <Route path="/lead/:id" element={<LeadDetails />} />
           <Route path="/lead/:id/edit" element={<EditLead />} />
-
-          {/* Deals */}
           <Route path="/deals" element={<Deals />} />
           <Route path="/deals/add" element={<AddDeal />} />
           <Route path="/deals/:id" element={<DealDetails />} />
           <Route path="/deals/:id/edit" element={<EditDeal />} />
-
-          {/* Sales */}
           <Route path="/sales" element={<Sales />} />
           <Route path="/sales/add" element={<AddSale />} />
           <Route path="/sales/:id" element={<SaleDetails />} />
           <Route path="/sales/:id/edit" element={<EditSale />} />
-
-          {/* Activities / Tasks */}
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/add" element={<AddActivity />} />
           <Route path="/activities/:id" element={<ActivityDetails />} />
           <Route path="/activities/:id/edit" element={<EditActivity />} />
-
-          {/* Communications */}
           <Route path="/communications" element={<Communications />} />
           <Route path="/communications/add" element={<AddCommunication />} />
           <Route path="/communications/:id" element={<CommunicationDetails />} />
           <Route path="/communications/:id/edit" element={<EditCommunication />} />
-
-          {/* Reports */}
           <Route path="/reports" element={<Reports />} />
-
-          {/* Employees */}
           <Route path="/employees" element={<Employees />} />
           <Route path="/employees/add" element={<AddEmployee />} />
           <Route path="/employees/:id" element={<ViewEmployee />} />
           <Route path="/employees/:id/edit" element={<EditEmployee />} />
-
-{/* Marketing Campaigns */}
           <Route path="/marketing/campaigns" element={<Campaigns />} />
           <Route path="/marketing/campaigns/add" element={<AddCampaign />} />
           <Route path="/marketing/campaigns/:id" element={<CampaignDetails />} />
           <Route path="/marketing/campaigns/:id/edit" element={<EditCampaign />} />
-
-          {/* Email Marketing */}
           <Route path="/marketing/email-marketing" element={<EmailMarketing />} />
           <Route path="/marketing/email-marketing/campaigns" element={<EmailCampaigns />} />
           <Route path="/marketing/email-marketing/campaigns/add" element={<AddEmailCampaign />} />
@@ -204,14 +180,10 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/email-marketing/templates/:id" element={<EmailTemplateDetails />} />
           <Route path="/marketing/email-marketing/templates/:id/edit" element={<EditEmailTemplate />} />
           <Route path="/marketing/email-marketing/history" element={<EmailHistory />} />
-
-          {/* roles &permission */}
           <Route path="/roles-permissions" element={<RolesPermissions />} />
           <Route path="/roles-permissions/add" element={<AddRole />} />
           <Route path="/roles-permissions/:id" element={<ViewRoles />} />
           <Route path="/roles-permissions/:id/edit" element={<EditRole />} />
-
-          {/* WhatsApp Marketing */}
           <Route path="/marketing/whatsapp" element={<WhatsAppMarketing />} />
           <Route path="/marketing/whatsapp/campaigns" element={<WhatsAppCampaigns />} />
           <Route path="/marketing/whatsapp/campaigns/add" element={<AddWhatsAppCampaign />} />
@@ -221,8 +193,6 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/whatsapp/templates/add" element={<AddWhatsAppTemplate />} />
           <Route path="/marketing/whatsapp/templates/:id/edit" element={<EditWhatsAppTemplate />} />
           <Route path="/marketing/whatsapp/history" element={<WhatsAppHistory />} />
-
-          {/* Social Media Marketing */}
           <Route path="/marketing/social-media" element={<SocialMedia />} />
           <Route path="/marketing/social-media/posts" element={<SocialPosts />} />
           <Route path="/marketing/social-media/posts/add" element={<AddSocialPost />} />
@@ -232,8 +202,6 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/social-media/campaigns/add" element={<AddSocialCampaign />} />
           <Route path="/marketing/social-media/campaigns/:id" element={<SocialCampaignDetails />} />
           <Route path="/marketing/social-media/history" element={<SocialMediaHistory />} />
-
-          {/* Ads / Meta Ads */}
           <Route path="/marketing/ads" element={<AdsDashboard />} />
           <Route path="/marketing/ads/campaigns" element={<AdCampaigns />} />
           <Route path="/marketing/ads/campaigns/add" element={<AddAdCampaign />} />
@@ -245,8 +213,6 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/ads/ads/add" element={<AddAdCreative />} />
           <Route path="/marketing/ads/history" element={<AdHistoryPage />} />
           <Route path="/marketing/ads/analytics" element={<AdAnalytics />} />
-
-{/* Marketing Automation */}
           <Route path="/marketing/automation" element={<MarketingAutomation />} />
           <Route path="/marketing/automation/list" element={<Automations />} />
           <Route path="/marketing/automation/add" element={<AddAutomation />} />
@@ -254,12 +220,14 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/automation/:id/edit" element={<EditAutomation />} />
           <Route path="/marketing/automation/logs" element={<AutomationLogs />} />
           <Route path="/marketing/automation/templates" element={<AutomationTemplates />} />
-
-          {/* Marketing Reports */}
           <Route path="/marketing/reports" element={<MarketingReports />} />
           <Route path="/marketing/reports/campaigns" element={<CampaignReports />} />
           <Route path="/marketing/reports/channels" element={<ChannelReports />} />
           <Route path="/marketing/reports/:id" element={<MarketingReportDetails />} />
+          <Route path="/payroll" element={<PayrollList />} />
+          <Route path="/payroll/add" element={<AddPayroll />} />
+          <Route path="/payroll/:id" element={<PayrollDetails />} />
+          <Route path="/payroll/:id/edit" element={<EditPayroll />} />
         </Route>
       </Routes>
     </Router>

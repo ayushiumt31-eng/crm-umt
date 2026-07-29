@@ -4,7 +4,7 @@ import { PayrollTable } from "../components/PayrollTable";
 import { payrollService } from "@/services/payroll.service";
 import { useDebounce } from "@/hooks";
 import type { Payroll } from "@/types/payroll";
-import { DollarSign, TrendingUp, CheckCircle, Clock, CreditCard } from "lucide-react";
+import { DollarSign, TrendingUp, CheckCircle, Clock, CreditCard, Plus } from "lucide-react";
 
 export function PayrollList() {
   const navigate = useNavigate();
@@ -61,6 +61,15 @@ export function PayrollList() {
               <h1 className="text-4xl font-bold text-white drop-shadow-lg">Payroll</h1>
               <p className="text-emerald-100 text-lg">Employee salary management system</p>
             </div>
+          </div>
+          <div className="relative z-10 flex justify-end">
+            <button
+              onClick={() => navigate("/payroll/add")}
+              className="inline-flex items-center gap-2 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 px-5 py-2.5 font-semibold text-white shadow-lg hover:bg-white/30 transition-all duration-200"
+            >
+              <Plus className="h-5 w-5" />
+              Add Payroll
+            </button>
           </div>
         </div>
       </div>

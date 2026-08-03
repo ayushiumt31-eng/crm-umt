@@ -124,7 +124,7 @@ export const permissionModules = [
     ],
   },
 
-  {
+{
     key: "marketing-automation",
     label: "Marketing Automation",
     permissions: [
@@ -135,6 +135,17 @@ export const permissionModules = [
       { key: "marketing.automation.activate", label: "Activate/Deactivate" },
       { key: "marketing.automation.duplicate", label: "Duplicate" },
       { key: "marketing.automation.export", label: "Export Logs" },
+    ],
+  },
+
+  {
+    key: "dynamic-forms",
+    label: "Dynamic Form Builder",
+    permissions: [
+      { key: "settings.dynamic_forms.view", label: "View" },
+      { key: "settings.dynamic_forms.create", label: "Create" },
+      { key: "settings.dynamic_forms.update", label: "Update" },
+      { key: "settings.dynamic_forms.delete", label: "Delete" },
     ],
   },
 ];

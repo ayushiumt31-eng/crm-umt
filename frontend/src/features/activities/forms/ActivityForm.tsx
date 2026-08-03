@@ -1,4 +1,4 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { activityFields } from "./activityFields";
 
 interface ActivityFormProps {
@@ -86,7 +86,7 @@ export default function ActivityForm({
   };
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Activity" : "Add Activity"}
       description={
         isEdit
@@ -99,7 +99,8 @@ export default function ActivityForm({
       submitLabel={isEdit ? "Update Activity" : "Add Activity"}
       cancelPath="/activities"
       isLoading={isLoading}
+      module="Activities"
+      formName="add-activity"
     />
   );
 }
-

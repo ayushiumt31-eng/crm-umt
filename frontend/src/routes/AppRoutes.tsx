@@ -130,6 +130,13 @@ import { PayrollDetails } from "@/features/payroll/pages/PayrollDetails";
 import AddPayroll from "@/features/payroll/pages/AddPayroll";
 import EditPayroll from "@/features/payroll/pages/EditPayroll";
 
+import {
+  DynamicFormList,
+  AddDynamicForm,
+  EditDynamicForm,
+  DynamicFormDetails,
+} from "@/features/dynamic-forms/pages";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -224,10 +231,14 @@ const AppRoutes: React.FC = () => {
           <Route path="/marketing/reports/campaigns" element={<CampaignReports />} />
           <Route path="/marketing/reports/channels" element={<ChannelReports />} />
           <Route path="/marketing/reports/:id" element={<MarketingReportDetails />} />
-          <Route path="/payroll" element={<PayrollList />} />
+<Route path="/payroll" element={<PayrollList />} />
           <Route path="/payroll/add" element={<AddPayroll />} />
           <Route path="/payroll/:id" element={<PayrollDetails />} />
           <Route path="/payroll/:id/edit" element={<EditPayroll />} />
+          <Route path="/settings/dynamic-forms" element={<DynamicFormList />} />
+          <Route path="/settings/dynamic-forms/add" element={<AddDynamicForm />} />
+          <Route path="/settings/dynamic-forms/:id" element={<DynamicFormDetails />} />
+          <Route path="/settings/dynamic-forms/:id/edit" element={<EditDynamicForm />} />
         </Route>
       </Routes>
     </Router>

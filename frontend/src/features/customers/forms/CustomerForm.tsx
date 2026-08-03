@@ -1,6 +1,5 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { customerFields } from "./customerFields";
-// import { customerFields } from "./customerFields";
 
 interface CustomerFormProps {
   mode: "create" | "edit";
@@ -18,7 +17,7 @@ export default function CustomerForm({
   const isEdit = mode === "edit";
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Customer" : "Add Customer"}
       description={
         isEdit
@@ -31,6 +30,8 @@ export default function CustomerForm({
       submitLabel={isEdit ? "Update Customer" : "Add Customer"}
       cancelPath="/customers"
       isLoading={isLoading}
+      module="Customers"
+      formName="add-customer"
     />
   );
 }

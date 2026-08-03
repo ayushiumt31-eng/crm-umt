@@ -1,4 +1,4 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { leadFields } from "./leadFields";
 
 interface LeadFormProps {
@@ -17,7 +17,7 @@ export default function LeadForm({
   const isEdit = mode === "edit";
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Lead" : "Add Lead"}
       description={
         isEdit
@@ -30,6 +30,8 @@ export default function LeadForm({
       submitLabel={isEdit ? "Update Lead" : "Add Lead"}
       cancelPath="/lead"
       isLoading={isLoading}
+      module="Leads"
+      formName="add-lead"
     />
   );
 }

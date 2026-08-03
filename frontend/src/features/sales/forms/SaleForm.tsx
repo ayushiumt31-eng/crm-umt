@@ -1,4 +1,4 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { salesFields } from "./salesFields";
 
 interface SaleFormProps {
@@ -21,17 +21,17 @@ export default function SaleForm({
     const amount = Number(data.amount) || 0;
     const discount = Number(data.discount) || 0;
     const tax = Number(data.tax) || 0;
-    
+
     // If user didn't type a final amount, auto-calculate it here before saving
     if (!data.finalAmount) {
       data.finalAmount = amount - discount + tax;
     }
-    
+
     await onSubmit(data);
   };
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Sale" : "Record New Sale"}
       description={
         isEdit
@@ -44,6 +44,8 @@ export default function SaleForm({
       submitLabel={isEdit ? "Update Sale" : "Save Sale"}
       cancelPath="/sales"
       isLoading={isLoading}
+      module="Sales"
+      formName="add-sale"
     />
   );
 }

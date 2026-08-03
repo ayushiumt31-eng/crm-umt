@@ -1,4 +1,4 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { payrollFields } from "./payrollFields";
 
 interface PayrollFormProps {
@@ -17,7 +17,7 @@ export default function PayrollForm({
   const isEdit = mode === "edit";
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Payroll" : "Add Payroll"}
       description={
         isEdit
@@ -30,7 +30,8 @@ export default function PayrollForm({
       submitLabel={isEdit ? "Update Payroll" : "Create Payroll"}
       cancelPath="/payroll"
       isLoading={isLoading}
+      module="Payroll"
+      formName="add-payroll"
     />
   );
 }
-

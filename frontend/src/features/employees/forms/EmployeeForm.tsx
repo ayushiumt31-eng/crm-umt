@@ -1,4 +1,4 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { employeeFields } from "./employeeFields";
 
 interface EmployeeFormProps {
@@ -17,7 +17,7 @@ export default function EmployeeForm({
   const isEdit = mode === "edit";
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Employee" : "Add Employee"}
       description={
         isEdit
@@ -30,6 +30,8 @@ export default function EmployeeForm({
       submitLabel={isEdit ? "Update Employee" : "Add Employee"}
       cancelPath="/employees"
       isLoading={isLoading}
+      module="Employees"
+      formName="add-employee"
     />
   );
 }

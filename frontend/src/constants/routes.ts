@@ -152,8 +152,15 @@ export const ROUTES = {
     LIST: "/reports",
   } as const,
 
-  SETTINGS: {
+SETTINGS: {
     LIST: "/settings",
+  } as const,
+
+  DYNAMIC_FORMS: {
+    LIST: "/settings/dynamic-forms",
+    ADD: "/settings/dynamic-forms/add",
+    VIEW: (id: string) => `/settings/dynamic-forms/${id}`,
+    EDIT: (id: string) => `/settings/dynamic-forms/${id}/edit`,
   } as const,
 } as const;
 

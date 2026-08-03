@@ -1,4 +1,4 @@
-import { Form } from "@/components/common/Form";
+import { DynamicFormWrapper } from "@/features/dynamic-forms/components/DynamicFormWrapper";
 import { dealFields } from "./dealFields";
 
 interface DealFormProps {
@@ -17,7 +17,7 @@ export default function DealForm({
   const isEdit = mode === "edit";
 
   return (
-    <Form
+    <DynamicFormWrapper
       title={isEdit ? "Edit Deal" : "Create Deal"}
       description={
         isEdit
@@ -30,6 +30,8 @@ export default function DealForm({
       submitLabel={isEdit ? "Update Deal" : "Create Deal"}
       cancelPath="/deals"
       isLoading={isLoading}
+      module="Deals"
+      formName="add-deal"
     />
   );
 }

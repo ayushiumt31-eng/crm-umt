@@ -11,11 +11,12 @@ import {
   Handshake,
   Receipt,
   ClipboardList,
-  MessageCircle,
+MessageCircle,
   Mail,
   Share2,
   TrendingUp,
   Workflow,
+  FileText,
 } from "lucide-react";
 
 import type { SidebarGroup } from "../types/sidebar";
@@ -198,11 +199,18 @@ export const sidebarMenu: SidebarGroup[] = [
         icon: Settings,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
-      {
+{
         id: 2,
         title: "Roles & Permissions",
         path: "/roles-permissions",
         icon: ShieldCheck,
+        roles: ["SUPER_ADMIN", "ADMIN"],
+      },
+      {
+        id: 3,
+        title: "Dynamic Form Builder",
+        path: "/settings/dynamic-forms",
+        icon: FileText,
         roles: ["SUPER_ADMIN", "ADMIN"],
       },
     ],

@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// import AuthLayout from "../layouts/AuthLayout";
+import AuthLayout from "../features/auth/components/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 import {
   Customers,
@@ -18,6 +19,16 @@ import {
 } from "../features/employees/pages";
 
 import PublicRoute from "./PublicRoute";
+
+import {
+  Login,
+  Register,
+  VerifyOtp,
+  ForgotPassword,
+  ResetPassword,
+  ChangePassword,
+  Profile,
+} from "@/features/auth/pages";
 
 import {
   AddLead,
@@ -141,9 +152,24 @@ const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route element={<PublicRoute />} />
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+        {/* Public auth routes */}
+        <Route element={<PublicRoute />}>
+          <Route element={<AuthLayout />}>
+<Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/verify-otp" element={<VerifyOtp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Route>
+        </Route>
+
+        {/* Root redirect */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        {/* Protected app routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/add" element={<AddCustomer />} />
           <Route path="/customers/:id" element={<CustomerDetails />} />
@@ -239,6 +265,9 @@ const AppRoutes: React.FC = () => {
           <Route path="/settings/dynamic-forms/add" element={<AddDynamicForm />} />
           <Route path="/settings/dynamic-forms/:id" element={<DynamicFormDetails />} />
           <Route path="/settings/dynamic-forms/:id/edit" element={<EditDynamicForm />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

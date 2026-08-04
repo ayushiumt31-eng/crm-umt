@@ -13,6 +13,12 @@ export const ROUTES = {
   // Auth
   AUTH: {
     LOGIN: "/login",
+    REGISTER: "/register",
+    VERIFY_OTP: "/verify-otp",
+    FORGOT_PASSWORD: "/forgot-password",
+    RESET_PASSWORD: "/reset-password",
+    CHANGE_PASSWORD: "/change-password",
+    PROFILE: "/profile",
   } as const,
 
   // Dashboard
